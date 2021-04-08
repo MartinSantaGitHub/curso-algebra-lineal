@@ -1,0 +1,337 @@
+---
+title: "Tarea 2"
+author: "Martin Santamaria"
+date: "2/5/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Pregunta 1
+
+Los elementos estrictamente inferiores son los que se encuentran debajo de la diagonal principal de la matriz, es decir los elementos $a_{ij}, \ \forall i > j$.
+
+$$\begin{pmatrix}
+a_{11} & a_{12} & a_{13} & a_{14} & a_{15} \\
+\mathbf{a_{21}} & a_{22} & a_{23} & a_{24} & a_{25} \\
+\mathbf{a_{31}} & \mathbf{a_{32}} & a_{33} & a_{34} & a_{35} \\
+\mathbf{a_{41}} & \mathbf{a_{42}} & \mathbf{a_{43}} & a_{44} & a_{45} \\
+\mathbf{a_{51}} & \mathbf{a_{52}} & \mathbf{a_{53}} & \mathbf{a_{54}} & a_{55}
+\end{pmatrix}$$
+
+Y si se trata de una matriz triangular superior, dichos elementos valen 0. Es decir, $a_{ij} = 0, \ \forall i > j$.
+
+## Pregunta 2
+
+Si el número de fila del elemento es igual al número de columna, entonces se encuentra en la diagonal principal $(A_{i,j} \ \ i = j)$.
+
+Si el número de fila es menor al número de columna, entonces el elemento se encuentra por encima de la diagonal principal $(A_{i,j} \ \ i < j)$.
+
+Y si el número de fila del elemento es mayor al número de columna, pues se encuentra por debajo de la diagonal principal $(A_{i,j} \ \ i > j)$.
+
+Asi tenemos que:
+
+Se encuentran en la diagonal principal: $\mathbf{a_{11}}, \ \mathbf{a_{44}}$
+
+Se encuentran por encima de la diagonal principal: $\mathbf{a_{23}}, \ \mathbf{a_{15}}$
+
+Se encuentran por debajo de la diagonal principal: $\mathbf{a_{21}}, \ \mathbf{a_{32}}, \ \mathbf{a_{53}}$
+
+## Pregunta 3
+
+Por lo expresado en el punto anterior tenemos que:
+
+$A_{ij}$ está en la diagonal principal $\Leftrightarrow i = j$
+
+$A_{ij}$ está por encima de la diagonal principal $\Leftrightarrow i < j$
+
+$A_{ij}$ está por debajo de la diagonal principal $\Leftrightarrow i > j$
+
+## Pregunta 4
+
+Las matrices triangulares inferiores son aquellas cuyos elementos por encima de la diagonal valen 0, mientras que las matrices tiangulares superiores son aquellas cuyos elementos por debajo de la diagonal valen 0. Es decir:
+
+$L_n(\mathbb{K}) := \{A \in \mathcal{M}(\mathbb{K}): \ \ \forall i,j \in \{1,...,n\},$ si $i < j$, entonces $A_{ij} = 0\}$
+
+$U_n(\mathbb{K}) := \{B \in \mathcal{M}(\mathbb{K}): \ \ \forall i,j \in \{1,...,n\},$ si $i > j$, entonces $B_{ij} = 0\}$
+
+## Pregunta 5
+
+Si transponemos una matriz triangular superior, obtenemos la matriz triangular inferior, y si transponemos una matriz triangular inferior, obtenemos la matriz triangular superior. 
+
+$A \in U_n(\mathbb{K}) \Leftrightarrow A^t \in L_n(\mathbb{K})$
+
+$B \in L_n(\mathbb{K}) \Leftrightarrow B^t \in U_n(\mathbb{K})$
+
+## Pregunta 6
+
+$$AB = \begin{pmatrix}
+a_{11}b_{11} + a_{12}b_{21} + a_{13}b_{31} & a_{11}b_{12} + a_{12}b_{22} + a_{13}b_{32} & a_{11}b_{13} + a_{12}b_{23} + a_{13}b_{33} \\
+a_{21}b_{11} + a_{22}b_{21} + a_{23}b_{31} & a_{21}b_{12} + a_{22}b_{22} + a_{23}b_{32} & a_{21}b_{13} + a_{22}b_{23} + a_{23}b_{33} \\
+a_{31}b_{11} + a_{32}b_{21} + a_{33}b_{31} & a_{31}b_{12} + a_{32}b_{22} + a_{33}b_{32} & a_{31}b_{13} + a_{32}b_{23} + a_{33}b_{33}
+\end{pmatrix}$$
+
+$$AB = \begin{pmatrix}
+a_{11}b_{11} + a_{12} \cdot 0 + a_{13} \cdot 0 & a_{11}b_{12} + a_{12}b_{22} + a_{13}\cdot 0 & a_{11}b_{13} + a_{12}b_{23} + a_{13}b_{33} \\
+0 \cdot b_{11} + a_{22} \cdot 0 + a_{23} \cdot 0 & 0 \cdot b_{12} + a_{22}b_{22} + a_{23} \cdot 0 & 0 \cdot b_{13} + a_{22}b_{23} + a_{23}b_{33} \\
+0 \cdot b_{11} + 0 \cdot 0 + a_{33} \cdot 0 & 0 \cdot b_{12} + 0 \cdot b_{22} + a_{33} \cdot 0 & 0 \cdot b_{13} + 0\cdot b_{23} + a_{33}b_{33}
+\end{pmatrix}$$
+
+$$AB = \begin{pmatrix}
+a_{11}b_{11} & a_{11}b_{12} + a_{12}b_{22} & a_{11}b_{13} + a_{12}b_{23} + a_{13}b_{33} \\
+0 & a_{22}b_{22} & a_{22}b_{23} + a_{23}b_{33} \\
+0 & 0 & a_{33}b_{33}
+\end{pmatrix}$$
+
+## Pregunta 7
+
+- Las entradas por debajo de la diagonal principal son **0**
+
+- La matriz $AB \in U_3(\mathbb{K})$
+
+- El elemento $(i,i)$−ésimo de la diagonal principal es $a_{ii}b_{ii}$
+
+## Pregunta 8
+
+Entradas por debajo de la diagonal principal:
+
+- $AB_{75} = \sum_{i=1}^8a_{7i}b_{i5} = a_{71}b_{15} + a_{72}b_{25} + a_{73}b_{35} + a_{74}b_{45} + a_{75}b_{55} + a_{76}b_{65} + a_{77}b_{75} + a_{78}b_{85}$
+
+$AB_{75} = 0 \cdot b_{15} + 0 \cdot b_{25} + 0 \cdot b_{35} + 0 \cdot b_{45} + 0 \cdot b_{55} + 0 + a_{77} \cdot 0 + a_{78} \cdot 0 = 0$
+
+- $AB_{61} = \sum_{i=1}^8a_{6i}b_{i1} = a_{61}b_{11} + a_{62}b_{21} + a_{63}b_{31} + a_{64}b_{41} + a_{65}b_{51} + a_{66}b_{61} + a_{67}b_{71} + a_{68}b_{81}$
+
+$AB_{61} = 0 \cdot b_{11} + 0 + 0 + 0 + 0 + a_{66} \cdot 0 + a_{67} \cdot 0 + a_{68} \cdot 0 = 0$
+
+- $AB_{32} = \sum_{i=1}^8a_{3i}b_{i2} = a_{31}b_{12} + a_{32}b_{22} + a_{33}b_{32} + a_{34}b_{42} + a_{35}b_{52} + a_{36}b_{62} + a_{37}b_{72} + a_{38}b_{82}$
+
+$AB_{32} = 0 \cdot b_{12} + 0 \cdot b_{22} + a_{33} \cdot 0 + a_{34} \cdot 0 + a_{35} \cdot 0 + a_{36} \cdot 0 + a_{37} \cdot 0 + a_{38} \cdot 0 = 0$
+
+- $AB_{74} = \sum_{i=1}^8a_{7i}b_{i4} = a_{71}b_{14} + a_{72}b_{24} + a_{73}b_{34} + a_{74}b_{44} + a_{75}b_{54} + a_{76}b_{64} + a_{77}b_{74} + a_{78}b_{84}$
+
+$AB_{74} = 0 \cdot b_{14} + 0 \cdot b_{24} + 0 \cdot b_{34} + 0 \cdot b_{44} + 0 + 0 + a_{77} \cdot 0 + a_{78} \cdot 0 = 0$
+
+- $AB_{87} = \sum_{i=1}^8a_{8i}b_{i7} = a_{81}b_{17} + a_{82}b_{27} + a_{83}b_{37} + a_{84}b_{47} + a_{85}b_{57} + a_{86}b_{67} + a_{87}b_{77} + a_{88}b_{87}$
+
+$AB_{87} = 0 \cdot b_{17} + 0 \cdot b_{27} + 0 \cdot b_{37} + 0 \cdot b_{47} + 0 \cdot b_{57} + 0 \cdot b_{67} + 0 \cdot b_{77} + a_{88} \cdot 0 = 0$
+
+Entradas de la diagonal principal:
+
+- $AB_{77} = \sum_{i=1}^8a_{7i}b_{i7} = a_{71}b_{17} + a_{72}b_{27} + a_{73}b_{37} + a_{74}b_{47} + a_{75}b_{57} + a_{76}b_{67} + a_{77}b_{77} + a_{78}b_{87}$
+
+$AB_{77} = 0 \cdot b_{17} + 0 \cdot b_{27} + 0 \cdot b_{37} + 0 \cdot b_{47} + 0 \cdot b_{57} + 0 \cdot b_{67} + a_{77}b_{77} + a_{78} \cdot 0 = a_{77}b_{77}$
+
+- $AB_{11} = \sum_{i=1}^8a_{1i}b_{i1} = a_{11}b_{11} + a_{12}b_{21} + a_{13}b_{31} + a_{14}b_{41} + a_{15}b_{51} + a_{16}b_{61} + a_{17}b_{71} + a_{18}b_{81}$
+
+$AB_{11} = a_{11}b_{11} + a_{12} \cdot 0 + a_{13} \cdot 0 + a_{14} \cdot 0 + a_{15} \cdot 0 + a_{16} \cdot 0 + a_{17} \cdot 0 + a_{18} \cdot 0 = a_{11}b_{11}$
+
+- $AB_{33} = \sum_{i=1}^8a_{3i}b_{i3} = a_{31}b_{13} + a_{32}b_{23} + a_{33}b_{33} + a_{34}b_{43} + a_{35}b_{53} + a_{36}b_{63} + a_{37}b_{73} + a_{38}b_{83}$
+
+$AB_{33} = 0 \cdot b_{13} + 0 \cdot b_{23} + a_{33}b_{33} + a_{34} \cdot 0 + a_{35} \cdot 0 + a_{36} \cdot 0 + a_{37} \cdot 0 + a_{38} \cdot 0 = a_{33}b_{33}$
+
+- $AB_{44} = \sum_{i=1}^8a_{4i}b_{i4} = a_{41}b_{14} + a_{42}b_{24} + a_{43}b_{34} + a_{44}b_{44} + a_{45}b_{54} + a_{46}b_{64} + a_{47}b_{74} + a_{48}b_{84}$
+
+$AB_{44} = 0 \cdot b_{14} + 0 \cdot b_{24} + 0 \cdot b_{34} + a_{44}b_{44} + a_{45} \cdot 0 + a_{46} \cdot 0 + a_{47} \cdot 0 + a_{48} \cdot 0 = a_{44}b_{44}$
+
+- $AB_{88} = \sum_{i=1}^8a_{8i}b_{i8} = a_{81}b_{18} + a_{82}b_{28} + a_{83}b_{38} + a_{84}b_{48} + a_{85}b_{58} + a_{86}b_{68} + a_{87}b_{78} + a_{88}b_{88}$
+
+$AB_{88} = 0 \cdot b_{18} + 0 \cdot b_{28} + 0 \cdot b_{38} + 0 \cdot b_{48} + 0 \cdot b_{58} + 0 \cdot b_{68} + 0 \cdot b_{78} + a_{88}b_{88} = a_{88}b_{88}$
+
+Entradas por encima de la diagonal principal:
+
+- $AB_{78} = \sum_{i=1}^8a_{7i}b_{i8} = a_{71}b_{18} + a_{72}b_{28} + a_{73}b_{38} + a_{74}b_{48} + a_{75}b_{58} + a_{76}b_{68} + a_{77}b_{78} + a_{78}b_{88}$
+
+$AB_{78} = 0 \cdot b_{18} + 0 \cdot b_{28} + 0 \cdot b_{38} + 0 \cdot b_{48} + 0 \cdot b_{58} + 0 \cdot b_{68} + a_{77}b_{78} + a_{78}b_{88} = a_{77}b_{78} + a_{78}b_{88}$
+
+- $AB_{15} = \sum_{i=1}^8a_{1i}b_{i5} = a_{11}b_{15} + a_{12}b_{25} + a_{13}b_{35} + a_{14}b_{45} + a_{15}b_{55} + a_{16}b_{65} + a_{17}b_{75} + a_{18}b_{85}$
+
+$AB_{15} = a_{11}b_{15} + a_{12}b_{25} + a_{13}b_{35} + a_{14}b_{45} + a_{15}b_{55} + a_{16} \cdot 0 + a_{17} \cdot 0 + a_{18} \cdot 0 = a_{11}b_{15} + a_{12}b_{25} + a_{13}b_{35} + a_{14}b_{45} + a_{15}b_{55}$
+
+- $AB_{36} = \sum_{i=1}^8a_{3i}b_{i6} = a_{31}b_{16} + a_{32}b_{26} + a_{33}b_{36} + a_{34}b_{46} + a_{35}b_{56} + a_{36}b_{66} + a_{37}b_{76} + a_{38}b_{86}$
+
+$AB_{36} = 0 \cdot b_{16} + 0 \cdot b_{26} + a_{33}b_{36} + a_{34}b_{46} + a_{35}b_{56} + a_{36}b_{66} + a_{37} \cdot 0 + a_{38} \cdot 0 = a_{33}b_{36} + a_{34}b_{46} + a_{35}b_{56} + a_{36}b_{66}$
+
+- $AB_{24} = \sum_{i=1}^8a_{2i}b_{i4} = a_{21}b_{14} + a_{22}b_{24} + a_{23}b_{34} + a_{24}b_{44} + a_{25}b_{54} + a_{26}b_{64} + a_{27}b_{74} + a_{28}b_{84}$
+
+$AB_{24} = 0 \cdot b_{14} + a_{22}b_{24} + a_{23}b_{34} + a_{24}b_{44} + a_{25} \cdot 0 + a_{26} \cdot 0 + a_{27} \cdot 0 + a_{28} \cdot 0 = a_{22}b_{24} + a_{23}b_{34} + a_{24}b_{44}$
+
+- $AB_{58} = \sum_{i=1}^8a_{5i}b_{i8} = a_{51}b_{18} + a_{52}b_{28} + a_{53}b_{38} + a_{54}b_{48} + a_{55}b_{58} + a_{56}b_{68} + a_{57}b_{78} + a_{58}b_{88}$
+
+$AB_{58} = 0 \cdot b_{18} + 0 \cdot b_{28} + 0 \cdot b_{38} + 0 \cdot b_{48} + a_{55}b_{58} + a_{56}b_{68} + a_{57}b_{78} + a_{58}b_{88} = a_{55}b_{58} + a_{56}b_{68} + a_{57}b_{78} + a_{58}b_{88}$
+
+## Pregunta 9
+
+Si $A, B \in \mathcal{M}_8(\mathbb{K})$, entonces $AB_{85} = a_{81}b_{15} + a_{82}b_{25} + ... + a_{88}b_{85} = \sum_{k=1}^8a_{8k}b_{k5}$
+
+Si $A, B \in \mathcal{M}_9(\mathbb{K})$, entonces $AB_{36} = a_{31}b_{16} + a_{32}b_{26} + ... + a_{39}b_{96} = \sum_{k=1}^9a_{3k}b_{k6}$
+
+Fórmula general:
+
+$AB_{ij} = a_{i1}b_{1j} + a_{i2}b_{2j} + ... + a_{in}b_{nj} = \sum_{k=1}^na_{ik}b_{kj}$
+
+## Pregunta 10
+
+- $\sum_{k=1}^{20} s_k = \sum_{k=1}^{7} s_k + \sum_{k=8}^{20} s_k$
+
+- $\sum_{k=1}^{29} s_k = \sum_{k=1}^{8} s_k + \sum_{k=9}^{20} s_k + \sum_{k=21}^{29} s_k$
+
+- $s_k = 2 \ \ \forall k \in \{1,...,10\}$, $s_k = 3 \ \ \forall k \in \{11,...,17\}$
+
+$\sum_{k=1}^{17} s_k = \sum_{k=1}^{10} s_k + \sum_{k=11}^{17} s_k = 10 \cdot 2 + 7 \cdot 3 = 41$
+
+- $s_k = 7 \ \ \forall k \in \{1,...,12\}$, $s_k = 9 \ \ \forall k \in \{13,...,19\}$, $s_k = 5 \ \ \forall k \in \{20,...,25\}$
+
+$\sum_{k=1}^{25} s_k = \sum_{k=1}^{12} s_k + \sum_{k=13}^{19} s_k + \sum_{k=20}^{25} s_k = 12 \cdot 7 + 7 \cdot 9 + 6 \cdot 5 = 177$
+
+- $s_k = 0 \ \ \forall k \in \{1,...,9\} \cup \{25,...,31\}$
+
+$\sum_{k=1}^{31} s_k = \sum_{k=1}^{9} s_k + \sum_{k=10}^{24} s_k + \sum_{k=25}^{31} s_k = 9 \cdot 0 + \sum_{k=10}^{24} + \ 7 \cdot 0 = \sum_{k=10}^{24}$
+
+- $s_k = 0 \ \ \forall k \in \{1,...,7\} \cup \{12,...,19\} \cup \{24,...,27\}$
+
+$\sum_{k=1}^{27} s_k = \sum_{k=1}^{7} s_k + \sum_{k=8}^{11} s_k + \sum_{k=12}^{19} s_k + \sum_{k=20}^{23} s_k + \sum_{k=24}^{27} s_k = 7 \cdot 0 + \sum_{k=8}^{11} + \ 8 \cdot 0 + \sum_{k=20}^{23} + \ 4 \cdot 0 = \sum_{k=8}^{11} + \sum_{k=20}^{23}$
+
+## Pregunta 11
+
+- $AB_{93} = \sum_{k=1}^{15} a_{9k}b_{k3} = \sum_{k=1}^{3} a_{9k}b_{k3} + \sum_{k=4}^{8} a_{9k}b_{k3} + \sum_{k=9}^{15} a_{9k}b_{k3}$
+
+$AB_{93} = \sum_{k=1}^{15} a_{9k}b_{k3} = \sum_{k=1}^{3} 0 \cdot b_{k3} + \sum_{k=4}^{8} 0 \cdot 0 + \sum_{k=9}^{15} a_{9k} \cdot 0 = 0$
+
+- $AB_{31} = \sum_{k=1}^{15} a_{3k}b_{k1} = a_{31}b_{11} + a_{32}b_{21} + \sum_{k=3}^{15} a_{3k}b_{k1}$
+
+$AB_{31} = \sum_{k=1}^{15} a_{3k}b_{k1} = 0 \cdot b_{11} + 0 \cdot 0 + \sum_{k=3}^{15} a_{3k} \cdot 0 = 0$
+
+- $AB_{15,3} = \sum_{k=1}^{15} a_{15k}b_{k3} = \sum_{k=1}^{3} a_{15k}b_{k3} + \sum_{k=4}^{14} a_{15k}b_{k3} + a_{15,15}b_{15,3}$
+
+$AB_{15,3} = \sum_{k=1}^{15} a_{15k}b_{k3} = \sum_{k=1}^{3} 0 \cdot b_{k3} + 0 \cdot 0 + a_{15,15} \cdot 0 = 0$
+
+## Pregunta 12
+
+- $AB_{55} = \sum_{k=1}^{5} a_{5k}b_{k5} = \sum_{k=1}^{4} a_{5k}b_{k5} + a_{55}b_{55} + \sum_{k=6}^{15} a_{5k}b_{k5}$
+
+$AB_{55} = \sum_{k=1}^{5} a_{5k}b_{k5} = \sum_{k=1}^{4} 0 \cdot b_{k5} + a_{55}b_{55} + \sum_{k=6}^{15} a_{5k} \cdot 0 = a_{55}b_{55}$
+
+- $AB_{10,10} = \sum_{k=1}^{15} a_{10k}b_{k10} = \sum_{k=1}^{9} a_{10k}b_{k10} + a_{10,10}b_{10,10} + \sum_{k=11}^{15} a_{10k}b_{k10}$
+
+$AB_{10,10} = \sum_{k=1}^{15} a_{10k}b_{k10} = \sum_{k=1}^{9} 0 \cdot b_{k10} + a_{10,10}b_{10,10} + \sum_{k=11}^{15} a_{10k} \cdot 0 = a_{10,10}b_{10,10}$
+
+- $AB_{15,15} = \sum_{k=1}^{15} a_{15k}b_{k15} = \sum_{k=1}^{14} a_{15k}b_{k15} + a_{15,15}b_{15,15}$
+
+$AB_{15,15} = \sum_{k=1}^{15} a_{15k}b_{k15} = \sum_{k=1}^{14} 0 \cdot b_{k15} + a_{15,15}b_{15,15} = a_{15,15}b_{15,15}$
+
+## Pregunta 13
+
+- $AB_{15} = \sum_{k=1}^{15} a_{1k}b_{k5} = \sum_{k=1}^{5} a_{1k}b_{k5} + \sum_{k=6}^{15} a_{1k}b_{k5}$
+
+$AB_{15} = \sum_{k=1}^{15} a_{1k}b_{k5} = \sum_{k=1}^{5} a_{1k}b_{k5} + \sum_{k=6}^{15} a_{1k} \cdot 0 = \sum_{k=1}^{5} a_{1k}b_{k5}$
+
+- $AB_{10,13} = \sum_{k=1}^{15} a_{10k}b_{k13} = \sum_{k=1}^{9} a_{10k}b_{k13} + \sum_{k=10}^{13} a_{10k}b_{k13} + \sum_{k=14}^{15} a_{10k}b_{k13}$
+
+$AB_{10,13} = \sum_{k=1}^{15} a_{10k}b_{k13} = \sum_{k=1}^{9} 0 \cdot b_{k13} + \sum_{k=10}^{13} a_{10k}b_{k13} + \sum_{k=14}^{15} a_{10k} \cdot 0 = \sum_{k=10}^{13} a_{10k}b_{k13}$
+
+- $AB_{69} = \sum_{k=1}^{15} a_{6k}b_{k9} = \sum_{k=1}^{5} a_{6k}b_{k9} + \sum_{k=6}^{9} a_{6k}b_{k9} + \sum_{k=10}^{15} a_{6k}b_{k9}$
+
+$AB_{69} = \sum_{k=1}^{15} a_{6k}b_{k9} = \sum_{k=1}^{5}0 \cdot b_{k9} + \sum_{k=6}^{9} a_{6k}b_{k9} + \sum_{k=10}^{15} a_{6k} \cdot 0 = \sum_{k=6}^{9} a_{6k}b_{k9}$
+
+## Pregunta 14
+
+- $AB_{ii} = \sum_{k=1}^{i-1} a_{ik}b_{ki} + a_{ii}b_{ii} + \sum_{k=i+1}^{n} a_{ik}b_{ki}$
+
+El primer sumando vale 0 ya que $\forall k \in \{1,...,i-1\} \ \ i > k$ por tanto $a_{ik} = 0$
+
+El tercer sumando vale 0 ya que $\forall k \in \{i+1,...,n\} \ \ k > i$ por tanto $b_{ki} = 0$
+
+Y asi nos queda:
+
+$AB_{ii} = a_{ii}b_{ii}$
+
+- $AB_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj} = \sum_{k=1}^{i-1} a_{ik}b_{kj} + \sum_{k=i}^{j} a_{ik}b_{kj} + \sum_{k=j+1}^{n} a_{ik}b_{kj}$ con $i<=j$
+
+El primer sumando vale 0 ya que $\forall k \in \{1,...,i-1\} \ \ i > k$ por tanto $a_{ik} = 0$
+
+El tercer sumando vale 0 ya que $\forall k \in \{j+1,...,n\} \ \ k > j$ por tanto $b_{kj} = 0$
+
+Y asi nos queda:
+
+$AB_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj} = \sum_{k=i}^{j} a_{ik}b_{kj}$
+
+#### Matrices triangulares inferiores
+
+- El producto de dos matrices triangulares inferiores es una matriz triangular
+inferior
+
+Sean $i,j \in {1,2,...,n}$ tales que $i < j$, las entradas $AB_{ij} = 0$
+
+**Demostración:**
+
+$AB_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj} = \sum_{k=1}^{i-1} a_{ik}b_{kj} + \sum_{k=i}^{j} a_{ik}b_{kj} + \sum_{k=j+1}^{n} a_{ik}b_{kj}$ con $i<j$
+
+El primer sumando vale 0 ya que $\forall k \in \{1,...,i-1\} \ \ k < j$ por tanto $b_{kj} = 0$
+
+El segundo sumando vale 0 ya que $\forall k \in \{i,...,j\} \ \ i <= k <= j$ por tanto $\sum_{k=i}^{j} a_{ik}b_{kj} = 0$
+
+El tercer sumando vale 0 ya que $\forall k \in \{j+1,...,n\} \ \ k > i$ por tanto $a_{ik} = 0$
+
+Y asi nos queda:
+
+$AB_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj} = \sum_{k=1}^{i-1} a_{ik}b_{kj} + \sum_{k=i}^{j} a_{ik}b_{kj} + \sum_{k=j+1}^{n} a_{ik}b_{kj} = 0 + 0 + 0 = 0$
+
+Con lo que queda demostrado.
+
+- $AB_{ii} = \sum_{k=1}^{i-1} a_{ik}b_{ki} + a_{ii}b_{ii} + \sum_{k=i+1}^{n} a_{ik}b_{ki}$
+
+El primer sumando vale 0 ya que $\forall k \in \{1,...,i-1\} \ \ k < i$ por tanto $b_{ki} = 0$
+
+El tercer sumando vale 0 ya que $\forall k \in \{i+1,...,n\} \ \ i < k$ por tanto $a_{ik} = 0$
+
+Y asi nos queda:
+
+$AB_{ii} = a_{ii}b_{ii}$
+
+- $AB_{ij} = \sum_{k=1}^{j} a_{ik}b_{kj} + \sum_{k=j+1}^{i-1} a_{ik}b_{kj} + \sum_{k=i}^{n} a_{ik}b_{kj}$ con $i>=j$
+
+$AB_{ij} = \sum_{k=1}^{j-1} a_{ik}b_{kj} + \sum_{k=j}^{i} a_{ik}b_{kj} + \sum_{k=i+1}^{n} a_{ik}b_{kj}$
+
+El primer sumando vale 0 ya que $\forall k \in \{1,...,j-1\} \ \ k < j$ por tanto $b_{kj} = 0$
+
+El tercer sumando vale 0 ya que $\forall k \in \{i+1,...,n\} \ \ k > i$ por tanto $a_{ik} = 0$
+
+Y asi nos queda:
+
+$AB_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj} = \sum_{k=j}^{i} a_{ik}b_{kj}$
+
+#### Matrices diagonales
+
+- El producto de dos matrices diagonales es una matriz diagonal
+
+Sean $i,j \in {1,2,...,n}$ tales que $i \ne j$, las entradas $AB_{ij} = 0$
+
+**Demostración:**
+
+- $AB_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj} = \sum_{k=1}^{i-1} a_{ik}b_{kj} + \sum_{k=i}^{j} a_{ik}b_{kj} + \sum_{k=j+1}^{n} a_{ik}b_{kj}$ con $i<j$
+
+El primer sumando vale 0 ya que $\forall k \in \{1,...,i-1\} \ \ k < j$ por tanto $b_{kj} = 0$
+
+El segundo sumando vale 0 ya que $\forall k \in \{i,...,j\} \ \ i <= k <= j$ por tanto $\sum_{k=i}^{j} a_{ik}b_{kj} = 0$
+
+El tercer sumando vale 0 ya que $\forall k \in \{j+1,...,n\} \ \ k > i$ por tanto $a_{ik} = 0$
+
+Y asi nos queda:
+
+$AB_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj} = \sum_{k=1}^{i-1} a_{ik}b_{kj} + \sum_{k=i}^{j} a_{ik}b_{kj} + \sum_{k=j+1}^{n} a_{ik}b_{kj} = 0 + 0 + 0 = 0$
+
+- $AB_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj} = \sum_{k=1}^{j} a_{ik}b_{kj} + \sum_{k=j+1}^{i-1} a_{ik}b_{kj} + \sum_{k=i}^{n} a_{ik}b_{kj}$ con $i>j$
+
+El primer sumando vale 0 ya que $\forall k \in \{1,...,j\} \ \ i > k$ por tanto $a_{ik} = 0$
+
+El segundo sumando vale 0 ya que $\forall k \in \{j+1,...,i-1\} \ \ i > k > j$ por tanto $\sum_{k=j+1}^{i-1} a_{ik}b_{kj} = 0$
+
+El tercer sumando vale 0 ya que $\forall k \in \{i,...,n\} \ \ k > j$ por tanto $b_{kj} = 0$
+
+Y asi nos queda:
+
+$AB_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj} = \sum_{k=1}^{j} a_{ik}b_{kj} + \sum_{k=j+1}^{i-1} a_{ik}b_{kj} + \sum_{k=i}^{n} a_{ik}b_{kj} = 0 + 0 + 0 = 0$
+
+Con lo que queda demostrado.

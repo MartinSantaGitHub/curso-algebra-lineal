@@ -1,0 +1,858 @@
+---
+title: "Tarea 7"
+author: "Martin Santamaria"
+date: "19/5/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Pregunta 1
+
+#### - **$A_1$**
+
+$A_1 = \begin{pmatrix}
+1 & 4 & 6 \\
+2 & -1 & 3 \\
+3 & 2 & 5
+\end{pmatrix} \sim_{F_2 - 2F_1} \begin{pmatrix}
+1 & 4 & 6 \\
+0 & -9 & -9 \\
+3 & 2 & 5
+\end{pmatrix} \sim_{F_3 - 3F_1} \begin{pmatrix}
+1 & 4 & 6 \\
+0 & -9 & -9 \\
+0 & -10 & -13
+\end{pmatrix} \\ \sim_{-\frac{1}{9}F_2} \begin{pmatrix}
+1 & 4 & 6 \\
+0 & 1 & 1 \\
+0 & -10 & -13
+\end{pmatrix} \sim_{-\frac{1}{10}F_3} \begin{pmatrix}
+1 & 4 & 6 \\
+0 & 1 & 1 \\
+0 & 1 & \frac{13}{10}
+\end{pmatrix} \sim_{F_3 - F_2} \begin{pmatrix}
+1 & 4 & 6 \\
+0 & 1 & 1 \\
+0 & 0 & \frac{3}{10}
+\end{pmatrix} \\ \sim_{\frac{10}{3}F_3} \begin{pmatrix}
+1 & 4 & 6 \\
+0 & 1 & 1 \\
+0 & 0 & 1
+\end{pmatrix}$
+
+$\therefore U = \begin{pmatrix}
+1 & 4 & 6 \\
+0 & 1 & 1 \\
+0 & 0 & 1
+\end{pmatrix}$
+
+Recordando el algoritmo tenemos que $U = L_n \ ... \ L_1 \cdot A$ donde $n = 6$ que es el número de operaciones que se llevaron a cabo para obtener $U$ 
+
+$U = F_3\left(\frac{10}{3}\right) \cdot F_{32}(-1) \cdot F_3\left(-\frac{1}{10}\right) \cdot F_2\left(-\frac{1}{9}\right) \cdot F_{31}(-3) \cdot F_{21}(-2) \cdot A_1$
+
+$A_1 = L_1^{-1} \cdot L_2^{-1} \ ... \ L_n^{-1} \cdot U$
+
+$A_1 = F_{21}(2) \cdot F_{31}(3) \cdot F_2(-9) \cdot F_3(-10) \cdot F_{32}(1) \cdot F_3\left(\frac{3}{10}\right) \cdot U$
+
+$L = \begin{pmatrix}
+1 & 0 & 0 \\
+2 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+3 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+0 & -9 & 0 \\
+0 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & -10
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 1 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & \frac{3}{10}
+\end{pmatrix}$
+
+Separando en grupo y operando
+
+$C = \begin{pmatrix}
+1 & 0 & 0 \\
+2 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+3 & 0 & 1
+\end{pmatrix} = \begin{pmatrix}
+1 & 0 & 0 \\
+2 & 1 & 0 \\
+3 & 0 & 1
+\end{pmatrix}$
+
+$D = \begin{pmatrix}
+1 & 0 & 0 \\
+0 & -9 & 0 \\
+0 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & -10
+\end{pmatrix} = \begin{pmatrix}
+1 & 0 & 0 \\
+0 & -9 & 0 \\
+0 & 0 & -10
+\end{pmatrix}$
+
+$E = \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 1 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & \frac{3}{10}
+\end{pmatrix} = \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 1 & \frac{3}{10}
+\end{pmatrix}$
+
+$C \cdot D = \begin{pmatrix}
+1 & 0 & 0 \\
+2 & -9 & 0 \\
+3 & 0 & -10
+\end{pmatrix}$
+
+$(C \cdot D) \cdot E = \begin{pmatrix}
+1 & 0 & 0 \\
+2 & -9 & 0 \\
+3 & -10 & -3
+\end{pmatrix}$
+
+$\therefore L = \begin{pmatrix}
+1 & 0 & 0 \\
+2 & -9 & 0 \\
+3 & -10 & -3
+\end{pmatrix}$
+
+Comprobamos que $L \cdot U = A_1$
+
+$\begin{pmatrix}
+1 & 0 & 0 \\
+2 & -9 & 0 \\
+3 & -10 & -3
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 4 & 6 \\
+0 & 1 & 1 \\
+0 & 0 & 1
+\end{pmatrix} = \begin{pmatrix}
+1 & 4 & 6 \\
+2 & -1 & 3 \\
+3 & 2 & 5
+\end{pmatrix} = A_1$
+
+#### - **$A_2$**
+
+$A_2 = \begin{pmatrix}
+2 & 4 & 2 \\
+1 & 3 & 1 \\
+7 & 5 & 6
+\end{pmatrix} \sim_{\frac{1}{2}F_1} \begin{pmatrix}
+1 & 2 & 1 \\
+1 & 3 & 1 \\
+7 & 5 & 6
+\end{pmatrix} \sim_{F_2 - F_1} \begin{pmatrix}
+1 & 2 & 1 \\
+0 & 1 & 0 \\
+7 & 5 & 6
+\end{pmatrix} \\ \sim_{F_3 - 7F_1} \begin{pmatrix}
+1 & 2 & 1 \\
+0 & 1 & 0 \\
+0 & -9 & -1
+\end{pmatrix} \sim_{F_3 + 9F_2} \begin{pmatrix}
+1 & 2 & 1 \\
+0 & 1 & 0 \\
+0 & 0 & -1
+\end{pmatrix} \sim_{-F_3} \begin{pmatrix}
+1 & 2 & 1 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}$
+
+$\therefore U = \begin{pmatrix}
+1 & 2 & 1 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}$
+
+$U = F_3(-1) \cdot F_{32}(9) \cdot F_{31}(-7) \cdot F_{21}(-1) \cdot F_1\left(\frac{1}{2}\right) \cdot A_2$
+
+con lo cual
+
+$L = F_1(2) \cdot F_{21}(1) \cdot F_{31}(7) \cdot F_{32}(-9) \cdot F_3(-1)$
+
+$L = \begin{pmatrix}
+2 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+1 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+7 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & -9 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & -1
+\end{pmatrix}$
+
+Separando en grupo y operando
+
+$B = \begin{pmatrix}
+2 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+1 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix} = \begin{pmatrix}
+2 & 0 & 0 \\
+1 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}$
+
+$C = \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+7 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & -9 & 1
+\end{pmatrix} = \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+7 & -9 & 1
+\end{pmatrix}$
+
+$D = \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & -1
+\end{pmatrix}$
+
+$B \cdot C = \begin{pmatrix}
+2 & 0 & 0 \\
+1 & 1 & 0 \\
+7 & -9 & 1
+\end{pmatrix}$
+
+$(B \cdot C) \cdot D = \begin{pmatrix}
+2 & 0 & 0 \\
+1 & 1 & 0 \\
+7 & -9 & -1
+\end{pmatrix}$
+
+$\therefore L = \begin{pmatrix}
+2 & 0 & 0 \\
+1 & 1 & 0 \\
+7 & -9 & -1
+\end{pmatrix}$
+
+Verificamos que $L \cdot U = A_2$
+
+$\begin{pmatrix}
+2 & 0 & 0 \\
+1 & 1 & 0 \\
+7 & -9 & -1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 2 & 1 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix} = \begin{pmatrix}
+2 & 4 & 2 \\
+1 & 3 & 1 \\
+7 & 5 & 6
+\end{pmatrix} = A_2$
+
+#### - **$A_3$**
+
+$A_3 = \begin{pmatrix}
+0 & 0 & 5 \\
+-1 & 4 & 1 \\
+2 & -3 & 2
+\end{pmatrix} \sim_{F_3 \rightarrow F_1} \begin{pmatrix}
+2 & -3 & 2 \\
+-1 & 4 & 1 \\
+0 & 0 & 5
+\end{pmatrix} \sim_{\frac{1}{2}F_1} \begin{pmatrix}
+1 & -\frac{3}{2} & 1 \\
+-1 & 4 & 1 \\
+0 & 0 & 5
+\end{pmatrix} \\ \sim_{F_2 + F_1} \begin{pmatrix}
+1 & -\frac{3}{2} & 1 \\
+0 & \frac{5}{2} & 2 \\
+0 & 0 & 5
+\end{pmatrix} \sim_{\frac{2}{5}F_2} \begin{pmatrix}
+1 & -\frac{3}{2} & 1 \\
+0 & 1 & \frac{4}{5} \\
+0 & 0 & 5
+\end{pmatrix} \sim_{\frac{1}{5}F_3} \begin{pmatrix}
+1 & -\frac{3}{2} & 1 \\
+0 & 1 & \frac{4}{5} \\
+0 & 0 & 1
+\end{pmatrix}$
+
+$\therefore U = \begin{pmatrix}
+1 & -\frac{3}{2} & 1 \\
+0 & 1 & \frac{4}{5} \\
+0 & 0 & 1
+\end{pmatrix}$ y $P = \begin{pmatrix}
+0 & 0 & 1 \\
+0 & 1 & 0 \\
+1 & 0 & 0
+\end{pmatrix}$
+
+Por tanto $PA_3 = \begin{pmatrix}
+2 & -3 & 2 \\
+-1 & 4 & 1 \\
+0 & 0 & 5
+\end{pmatrix}$
+
+$U = F_3\left(\frac{1}{5}\right) \cdot F_2\left(\frac{2}{5}\right) \cdot F_{21}(1) \cdot F_1\left(\frac{1}{2}\right) \cdot PA_3$
+
+con lo cual
+
+$F_1(2) \cdot F_{21}(-1) \cdot F_2\left(\frac{5}{2}\right) \cdot F_3(5) \cdot U = PA_3$
+
+$L = \begin{pmatrix}
+2 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+-1 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+0 & \frac{5}{2} & 0 \\
+0 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 5
+\end{pmatrix}$
+
+Separando en grupo y operando
+
+$B = \begin{pmatrix}
+2 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+-1 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix} = \begin{pmatrix}
+2 & 0 & 0 \\
+-1 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}$
+
+$C = \begin{pmatrix}
+1 & 0 & 0 \\
+0 & \frac{5}{2} & 0 \\
+0 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 5
+\end{pmatrix} = \begin{pmatrix}
+1 & 0 & 0 \\
+0 & \frac{5}{2} & 0 \\
+0 & 0 & 5
+\end{pmatrix}$
+
+$B \cdot C = \begin{pmatrix}
+2 & 0 & 0 \\
+-1 & \frac{5}{2} & 0 \\
+0 & 0 & 5
+\end{pmatrix}$
+
+$\therefore L = \begin{pmatrix}
+2 & 0 & 0 \\
+-1 & \frac{5}{2} & 0 \\
+0 & 0 & 5
+\end{pmatrix}$
+
+Verificamos que $L \cdot U = PA_3$
+
+$\begin{pmatrix}
+2 & 0 & 0 \\
+-1 & \frac{5}{2} & 0 \\
+0 & 0 & 5
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & -\frac{3}{2} & 1 \\
+0 & 1 & \frac{4}{5} \\
+0 & 0 & 1
+\end{pmatrix} = \begin{pmatrix}
+2 & -3 & 2 \\
+-1 & 4 & 1 \\
+0 & 0 & 5
+\end{pmatrix} = PA_3$
+
+#### - **$A_4$**
+
+$A_4 = \begin{pmatrix}
+3 & 9 & -2 \\
+6 & -3 & 8 \\
+4 & 6 & 5
+\end{pmatrix} \sim_{F_2 - 2F_1} \begin{pmatrix}
+3 & 9 & -2 \\
+0 & -21 & 12 \\
+4 & 6 & 5
+\end{pmatrix} \sim_{\frac{1}{3}F_1} \begin{pmatrix}
+1 & 3 & -\frac{2}{3} \\
+0 & -21 & 12 \\
+4 & 6 & 5
+\end{pmatrix} \\ \sim_{F_3 - 4F_1} \begin{pmatrix}
+1 & 3 & -\frac{2}{3} \\
+0 & -21 & 12 \\
+0 & -6 & \frac{23}{3}
+\end{pmatrix} \sim_{F_3 - \frac{2}{7}F_2} \begin{pmatrix}
+1 & 3 & -\frac{2}{3} \\
+0 & -21 & 12 \\
+0 & 0 & \frac{89}{21}
+\end{pmatrix} \sim_{-\frac{1}{21}F_2} \begin{pmatrix}
+1 & 3 & -\frac{2}{3} \\
+0 & 1 & -\frac{4}{7} \\
+0 & 0 & \frac{89}{21}
+\end{pmatrix} \\ \sim_{\frac{21}{89}F_3} \begin{pmatrix}
+1 & 3 & -\frac{2}{3} \\
+0 & 1 & -\frac{4}{7} \\
+0 & 0 & 1
+\end{pmatrix}$
+
+$\therefore U = \begin{pmatrix}
+1 & 3 & -\frac{2}{3} \\
+0 & 1 & -\frac{4}{7} \\
+0 & 0 & 1
+\end{pmatrix}$
+
+$U = F_3\left(\frac{21}{89}\right) \cdot F_2\left(-\frac{1}{21}\right) \cdot F_{32}\left(-\frac{2}{7}\right) \cdot F_{31}(-4) \cdot F_1\left(\frac{1}{3}\right) \cdot F_{21}(-2) \cdot A_4$
+
+Con lo cual
+
+$L = F_{21}(2) \cdot F_1(3) \cdot F_{31}(4) \cdot F_{32}\left(\frac{2}{7}\right) \cdot F_2(-21) \cdot F_3\left(\frac{89}{21}\right)$
+
+$L = \begin{pmatrix}
+1 & 0 & 0 \\
+2 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+3 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+4 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & \frac{2}{7} & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+0 & -21 & 0 \\
+0 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & \frac{89}{21}
+\end{pmatrix}$
+
+Separando en grupo y operando
+
+$B = \begin{pmatrix}
+1 & 0 & 0 \\
+2 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+3 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix} = \begin{pmatrix}
+3 & 0 & 0 \\
+6 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}$
+
+$C = \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+4 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & \frac{2}{7} & 1
+\end{pmatrix} = \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+4 & \frac{2}{7} & 1
+\end{pmatrix}$
+
+$D = \begin{pmatrix}
+1 & 0 & 0 \\
+0 & -21 & 0 \\
+0 & 0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & \frac{89}{21}
+\end{pmatrix} = \begin{pmatrix}
+1 & 0 & 0 \\
+0 & -21 & 0 \\
+0 & 0 & \frac{89}{21}
+\end{pmatrix}$
+
+$B \cdot C = \begin{pmatrix}
+3 & 0 & 0 \\
+6 & 1 & 0 \\
+4 & \frac{2}{7} & 1
+\end{pmatrix}$
+
+$(B \cdot C) \cdot D = \begin{pmatrix}
+3 & 0 & 0 \\
+6 & -21 & 0 \\
+4 & -6 & \frac{89}{21}
+\end{pmatrix}$
+
+$\therefore L = \begin{pmatrix}
+3 & 0 & 0 \\
+6 & -21 & 0 \\
+4 & -6 & \frac{89}{21}
+\end{pmatrix}$
+
+Comprobamos que $L \cdot U = A_4$
+
+$\begin{pmatrix}
+3 & 0 & 0 \\
+6 & -21 & 0 \\
+4 & -6 & \frac{89}{21}
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 3 & -\frac{2}{3} \\
+0 & 1 & -\frac{4}{7} \\
+0 & 0 & 1
+\end{pmatrix} = \begin{pmatrix}
+3 & 9 & -2 \\
+6 & -3 & 8 \\
+4 & 6 & 5
+\end{pmatrix} = A_4$
+
+### Pregunta 2
+
+#### - **$B_1$**
+
+$A_1X = B_1$
+
+$LUX = B_1$ donde $Y = UX$
+
+entonces $LY = B_1$
+
+$\begin{pmatrix}
+1 & 0 & 0 \\
+2 & -9 & 0 \\
+3 & -10 & -3
+\end{pmatrix} \begin{pmatrix}
+y_1 \\
+y_2 \\
+y_3
+\end{pmatrix} = \begin{pmatrix}
+-1 \\
+7 \\
+2
+\end{pmatrix}$
+
+De este sistema sale que $y_1 = -1$, $y_2 = -1$ e $y_3 = \frac{5}{3}$
+
+Resolvemos $UX = Y$
+
+$\begin{pmatrix}
+1 & 4 & 6 \\
+0 & 1 & 1 \\
+0 & 0 & 1
+\end{pmatrix} \begin{pmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{pmatrix} = \begin{pmatrix}
+-1 \\
+-1 \\
+\frac{5}{3}
+\end{pmatrix}$
+
+con lo cual
+
+$x_3 = \frac{5}{3}$, $x_2 = -\frac{8}{3}$ y $x_1 = -11 + \frac{32}{3} = -\frac{1}{3}$
+
+$\therefore X = \begin{pmatrix}
+-\frac{1}{3} \\
+-\frac{8}{3} \\
+\frac{5}{3}
+\end{pmatrix}$
+
+#### - **$B_2$**
+
+Tal como vimos en el apartado anterior, $LY = B$
+
+$\begin{pmatrix}
+2 & 0 & 0 \\
+1 & 1 & 0 \\
+7 & -9 & -1
+\end{pmatrix} \begin{pmatrix}
+y_1 \\
+y_2 \\
+y_3
+\end{pmatrix} = \begin{pmatrix}
+6 \\
+1 \\
+1
+\end{pmatrix}$
+
+$y_1 = 3$, $y_2 = -2$, $y_3 = -(1 - 18 - 21) = 38$
+
+Resolvemos $UX = Y$
+
+$\begin{pmatrix}
+1 & 2 & 1 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix} \begin{pmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{pmatrix} = \begin{pmatrix}
+3 \\
+-2 \\
+38
+\end{pmatrix}$
+
+$x_3 = 38$, $x_2 = -2$, $x_1 = 3 + 4 - 38 = -31$
+
+$\therefore X = \begin{pmatrix}
+-31 \\
+-2 \\
+38
+\end{pmatrix}$
+
+#### - **$B_3$**
+
+En este caso tenemos que
+
+$P_3AX = PB_3$
+
+$LUX = PB_3$ donde $Y = UX$
+
+Entonces $LY = PB_3$
+
+$\begin{pmatrix}
+2 & 0 & 0 \\
+-1 & \frac{5}{2} & 0 \\
+0 & 0 & 5
+\end{pmatrix} \begin{pmatrix}
+y_1 \\
+y_2 \\
+y_3
+\end{pmatrix} = \begin{pmatrix}
+0 & 0 & 1 \\
+0 & 1 & 0 \\
+1 & 0 & 0
+\end{pmatrix} \begin{pmatrix}
+3 \\
+10 \\
+4
+\end{pmatrix} \Leftrightarrow \begin{pmatrix}
+2 & 0 & 0 \\
+-1 & \frac{5}{2} & 0 \\
+0 & 0 & 5
+\end{pmatrix} \begin{pmatrix}
+y_1 \\
+y_2 \\
+y_3
+\end{pmatrix} = \begin{pmatrix}
+4 \\
+10 \\
+3
+\end{pmatrix}$
+
+$y_1 = 2$, $y_3 = \frac{3}{5}$, $y_2 = \frac{24}{5}$
+
+Resolvemos $UX = Y$
+
+$\begin{pmatrix}
+1 & -\frac{3}{2} & 1 \\
+0 & 1 & \frac{4}{5} \\
+0 & 0 & 1
+\end{pmatrix} \begin{pmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{pmatrix} = \begin{pmatrix}
+2 \\
+\frac{24}{5} \\
+\frac{3}{5}
+\end{pmatrix}$
+
+$x_3 = \frac{3}{5}$, $x_2 = \frac{108}{25}$, $x_1 = 2 - \frac{3}{5} + \frac{162}{25} = \frac{197}{25}$
+
+$\therefore X = \begin{pmatrix}
+\frac{197}{25} \\
+\frac{108}{25} \\
+\frac{3}{5}
+\end{pmatrix}$
+
+#### - **$B_4$**
+
+$LY = B_4$
+
+$\begin{pmatrix}
+3 & 0 & 0 \\
+6 & -21 & 0 \\
+4 & -6 & \frac{89}{21}
+\end{pmatrix} \begin{pmatrix}
+y_1 \\
+y_2 \\
+y_3
+\end{pmatrix} = \begin{pmatrix}
+-1 \\
+0 \\
+2
+\end{pmatrix}$
+
+$y_1 = -\frac{1}{3}$, $y_2 = -\frac{2}{21}$, $y_3 = \frac{21}{89}(2 - \frac{4}{7} + \frac{4}{3}) = \frac{58}{89}$
+
+Resolvemos $UX = Y$
+
+$\begin{pmatrix}
+1 & 3 & -\frac{2}{3} \\
+0 & 1 & -\frac{4}{7} \\
+0 & 0 & 1
+\end{pmatrix} \begin{pmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{pmatrix} = \begin{pmatrix}
+-\frac{1}{3} \\
+-\frac{2}{21} \\
+\frac{58}{89}
+\end{pmatrix}$
+
+$x_3 = \frac{58}{89}$, $x_2 = -\frac{2}{21} + \frac{232}{623} = \frac{74}{267}$, $x_1 = -\frac{1}{3} - \frac{74}{89} + \frac{116}{267} = -\frac{65}{89}$
+
+$\therefore X = \begin{pmatrix}
+-\frac{65}{89} \\
+\frac{74}{267} \\
+\frac{58}{89}
+\end{pmatrix}$
+
+### Pregunta 3
+
+Tenemos la matriz $A$ dividida en los siguientes bloques
+
+$A = \begin{pmatrix}
+B & | & C \\
+-- & | & -- \\
+0 & | & D 
+\end{pmatrix}$
+
+Donde $B \in \mathcal{M}_2(\mathbb{R})$, $C \in \mathcal{M}_{2x1}(\mathbb{R})$ y $D \in \mathcal{M}_1(\mathbb{R})$
+
+La matriz $D$ es directamente es escalar 2.
+
+Como el número de filas de la matriz $C$ es igual al número de filas de la matriz $B$ y el número de columnas de $C$ es igual al número de columnas de $D$, entonces la inversa de $A$ se puede calcular de la siguiente manera
+
+$A^{-1} = \begin{pmatrix}
+B^{-1} & | & -B^{-1}CD^{-1} \\
+-- & | & ------- \\
+0 & | & D^{-1} 
+\end{pmatrix}$
+
+$A = \begin{pmatrix}
+1 & 1 & | & -2 \\
+1 & 2 & | & -1 \\
+-- & -- & | & -- \\
+0 & 0 & | & 2 
+\end{pmatrix}$
+
+Calculamos la inversa de $B^{-1}$ mediante el método de Gauss
+
+$B^{-1} = \begin{pmatrix}
+1 & 1 & | & 1 & 0 \\
+1 & 2 & | & 0 & 1
+\end{pmatrix}$
+
+$F_2 - F_1 \rightarrow F_2$
+
+$\begin{pmatrix}
+1 & 1 & | & 1 & 0 \\
+0 & 1 & | & -1 & 1
+\end{pmatrix}$
+
+$F_1 - F_2 \rightarrow F_1$
+
+$\begin{pmatrix}
+1 & 0 & | & 2 & -1 \\
+0 & 1 & | & -1 & 1
+\end{pmatrix}$
+
+$\therefore B^{-1} = \begin{pmatrix}
+2 & -1 \\
+-1 & 1
+\end{pmatrix}$
+
+$-B^{-1} = \begin{pmatrix}
+-2 & 1 \\
+1 & -1
+\end{pmatrix}$
+
+$-B^{-1}C = \begin{pmatrix}
+-2 & 1 \\
+1 & -1
+\end{pmatrix} \begin{pmatrix}
+-2 \\
+-1
+\end{pmatrix} = \begin{pmatrix}
+3 \\
+-1
+\end{pmatrix}$
+
+$D^{-1} = \frac{1}{2}$
+
+$-B^{-1}CD^{-1} = \begin{pmatrix}
+\frac{3}{2} \\
+-\frac{1}{2}
+\end{pmatrix}$
+
+$\therefore A^{-1} = \begin{pmatrix}
+2 & -1 & \frac{3}{2} \\
+-1 & 1 & -\frac{1}{2} \\
+0 & 0 & \frac{1}{2}
+\end{pmatrix}$

@@ -1,0 +1,372 @@
+---
+title: "Tarea 6"
+author: "Martin Santamaria"
+date: "17/5/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+Sys.setenv(RETICULATE_PYTHON = "/Python38")
+library(reticulate)
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(engine.path = list(octave = "/Octave/Octave-5.2.0/mingw64/bin/octave-cli-5.2.0.exe"))
+```
+
+### Ejercicio 1
+
+#### En `R`
+
+Definimos el sistema
+
+```{r}
+library(matlib)
+A = rbind(c(10,2,-1,1,0,10),c(-1,-3,0,0,-1,5),c(0,-1,3,-1,0,0),c(17,1,0,3,5,-15),c(0,-10,0,-5,3,0),c(-3,1,1,1,-2,2))
+b = c(0,5,5,4,-21,11)
+AB = cbind(A,b)
+showEqn(A,b)
+```
+
+Calculamos su compatibilidad
+
+```{r}
+R(A)
+R(AB)
+```
+
+El rango de $A$ es igual al rango de la matriz ampliada $AB$ que también es igual al número de incógnitas. Por tanto, se trata de un **sistema compatible determinado.**
+
+Procedemos a resolverlo
+
+```{r}
+Solve(A, b, fractions = T)
+```
+
+Para los siguientes apartados en los otros lenguajes solamente vamos a mostrar la instrucción y corroborar que el resultado sea el mismo que en `R`.
+
+En `Python`
+
+Definimos el sistema
+
+```{python}
+import numpy as np
+A = np.array([[10,2,-1,1,0,10],[-1,-3,0,0,-1,5],[0,-1,3,-1,0,0],[17,1,0,3,5,-15],[0,-10,0,-5,3,0],[-3,1,1,1,-2,2]])
+b = np.array([[0],[5],[5],[4],[-21],[11]])
+AB = np.append(A,b, axis = 1)
+```
+
+Calculamos su compatibilidad
+
+```{python}
+np.linalg.matrix_rank(A) == np.linalg.matrix_rank(AB) == 6 # Este último es el número de incógnitas.
+```
+
+Resolvemos
+
+```{python}
+np.linalg.solve(A,b)
+```
+
+En `Octave`
+
+Definimos el sistema
+
+```{octave}
+A = [10 2 -1 1 0 10; -1 -3 0 0 -1 5; 0 -1 3 -1 0 0; 17 1 0 3 5 -15; 0 -10 0 -5 3 0; -3 1 1 1 -2 2];
+b = [0;5;5;4;-21;11];
+AB = [A b]
+
+# Calculamos su compatibilidad
+rank(A) == rank(AB)
+rank(A) == 6
+
+# Resolvemos
+linsolve(A,b)
+```
+
+### Ejercicio 2
+
+En este ejercicio para no repetir las mismas funciones que en el ejercicio anterior, se usarán algunas variantes, por ejemplo la libreria `sympy` de Python.
+
+#### En `R`
+
+Definimos el sistema
+
+```{r}
+A = rbind(c(-2,2,-1,1,0,4,0),c(-1,-3,0,0,-1,5,-2),c(0,-1,3,-1,0,0,0),c(0,1,0,3,-2,1,4),c(0,-3,0,-5,3,0,-2),c(-3,1,1,1,-2,2,1))
+b = c(5,3,5,0,5,0)
+AB = cbind(A,b)
+showEqn(A,b)
+```
+
+Calculamos su compatibilidad
+
+```{r}
+R(A)
+R(AB)
+```
+
+El rango de $A$ es igual al de la matriz ampliada $AB$ por tanto se trata de un sistema compatible. Pero es menor que el número de incógnitas que es 7. Por tanto es un **sistema compatible indeterminado**.
+
+Resolvemos el sistema
+
+```{r}
+Solve(A, b, fractions = T)
+```
+
+Se observa que la variable $x_7$ es libre, la cual dependen las otras. Por tanto la solución es
+
+$$(x_1,x_2,x_3,x_4,x_5,x_6,x_7) = \left(\frac{467}{7},\frac{383}{7},-\frac{149}{14},-\frac{1283}{14}-\frac{1349}{14},\frac{55}{2},0\right) + \lambda\left(-\frac{621}{7},-\frac{509}{7},\frac{233}{14},\frac{1717}{14},\frac{1853}{14},-\frac{69}{2},1\right)$$
+
+#### En `Python`
+
+Definimos el sistema
+
+```{python}
+from sympy import *
+from sympy.solvers.solveset import linsolve
+A = Matrix([[-2,2,-1,1,0,4,0],[-1,-3,0,0,-1,5,-2],[0,-1,3,-1,0,0,0],[0,1,0,3,-2,1,4],[0,-3,0,-5,3,0,-2],[-3,1,1,1,-2,2,1]])
+b = Matrix([5,3,5,0,5,0])
+AB = A.col_insert(7,b)
+AB
+```
+
+Calculamos su compatibilidad
+
+```{python}
+A.rank()
+AB.rank()
+```
+
+Resolvemos el sistema
+
+```{python}
+x1,x2,x3,x4,x5,x6,x7 = symbols('x1,x2,x3,x4,x5,x6,x7')
+linsolve(AB, (x1,x2,x3,x4,x5,x6,x7))
+```
+
+$\therefore$ la solución es 
+
+$$\left\{x \in \mathbb{R}^3 : x_1 = \frac{467}{7} - \frac{621}{7}x_7, \ \ x_2 = \frac{383}{7} - \frac{509}{7}x_7, \ \ x_3 = -\frac{149}{14} + \frac{233}{14}x_7, \ \ \\ x_4 = -\frac{1283}{14} +  \frac{1717}{14}x_7, \ \ x_5 = -\frac{1349}{14} + \frac{1853}{14}x_7, \ \ x_6 = \frac{55}{2} - \frac{69}{2}x_7, \ \ x_7 \in \mathbb{R} \right\}$$
+
+#### En `Octave`
+
+```{octave}
+# Definimos el sistema
+A = [-2 2 -1 1 0 4 0; -1 -3 0 0 -1 5 -2; 0 -1 3 -1 0 0 0; 0 1 0 3 -2 1 4; 0 -3 0 -5 3 0 -2; -3 1 1 1 -2 2 1];
+b = [5;3;5;0;5;0];
+AB = [A b]
+
+# Calculamos su compatibilidad
+rank(A) == rank(AB)
+rank(A) == 7
+
+# Resolvemos
+rref(AB)
+```
+
+Despejando este sistema tenemos un conjunto infinito de soluciones tal como vimos antes.
+
+### Ejercicio 3
+
+#### En `R`
+
+Definimos el sistema
+
+```{r}
+A = rbind(c(10,2,-1,1,0,10),c(-1,-3,0,0,-1,5),c(9,-1,-1,1,-1,15),c(17,1,0,3,5,-15),c(0,-10,0,-5,3,0),c(-3,1,1,1,-2,2))
+b = c(0,5,0,4,-21,11)
+AB = cbind(A,b)
+showEqn(A,b)
+```
+
+Calculamos su compatibilidad
+
+```{r}
+R(A)
+R(AB)
+all.equal(R(A),R(AB))
+```
+
+Vemos claramente que como el rango de la matriz $A$ es diferente del de la matriz ampliada $AB$, el sistema es incompatible.
+
+Otra manera de verlo
+
+```{r}
+Solve(A,b,fractions = T)
+```
+
+Donde obtenemos 0 = 5 lo cual es un absurdo y por tanto implica que el sistema es incompatible.
+
+#### En `Python`
+
+Definimos el sistema
+
+```{python}
+A = Matrix([[10,2,-1,1,0,10],[-1,-3,0,0,-1,5],[9,-1,-1,1,-1,15],[17,1,0,3,5,-15],[0,-10,0,-5,3,0],[-3,1,1,1,-2,2]])
+b = Matrix([0,5,0,4,-21,11])
+AB = A.col_insert(7,b)
+AB
+```
+
+Calculamos su compatibilidad
+
+```{python}
+A.rank() == AB.rank()
+```
+
+Otra manera de verlo
+
+```{python}
+x1,x2,x3,x4,x5,x6 = symbols('x1,x2,x3,x4,x5,x6')
+linsolve(AB, (x1,x2,x3,x4,x5,x6))
+```
+
+#### En `Octave`
+
+```{octave}
+# Definimos el sistema
+A = [10 2 -1 1 0 10; -1 -3 0 0 -1 5; 9 -1 -1 1 -1 15; 17 1 0 3 5 -15; 0 -10 0 -5 3 0; -3 1 1 1 -2 2];
+b = [0 ;5 ;0 ;4 ;-21 ;11];
+AB = [A b]
+
+# Calculamos su compatibilidad
+rank(A) == rank(AB)
+
+# Otra manera de verlo
+rref(AB)
+```
+
+### Ejercicio 4
+
+Primero despejamos la matriz $X$ para luego reemplazar por las matrices correspondientes. Asi de este modo nos queda un sistema de la forma $MX = N$. Cabe destacar que la matriz $M$ debe ser invertible para poder hallar la matriz $X$.
+
+- Apartado **(a)**
+
+$AX + 3B = -5X$
+
+$AX + 5X = -3B$
+
+$(A + 5)X = -3B$
+
+$M = (A + 5)$
+
+$N = -3B$
+
+#### En `R`
+
+Definimos las matrices
+
+```{r}
+A = rbind(c(-6,-3),c(0,-3))
+B = rbind(c(-1,0),c(4,-2))
+M = A+5
+N = -3*B
+```
+
+Calculamos la matriz $X$
+
+```{r}
+X = solve(M,N)
+X
+```
+
+#### En `Python`
+
+Definimos las matrices
+
+```{python}
+A = np.array([[-6,-3],[0,-3]])
+B = np.array([[-1,0],[4,-2]])
+M = A+5
+N = -3*B
+```
+
+Calculamos la matriz $X$. En este caso debemos hallar la inversa de $M$.
+
+```{python}
+X = np.linalg.inv(M).dot(N)
+X
+```
+
+#### En `Octave`
+
+```{octave}
+# Definimos las matrices
+A = [-6 -3; 0 -3];
+B = [-1 0; 4 -2];
+M = A+5;
+N = -3*B;
+
+# Calculamos la matriz X
+X = linsolve(M,N);
+X
+```
+
+- Apartado **(b)**
+
+$ACX + 3B = 10I - X$
+
+$ACX + X = 10I - 3B$
+
+$(AC + I)X = 10I - 3B$
+
+$M = (AC + I)$
+
+$N = 10I - 3B$
+
+#### En `R`
+
+Definimos las matrices
+
+```{r}
+A = rbind(c(1,2),c(0,2))
+B = rbind(c(2,-1),c(-1,5))
+C = rbind(c(2,6),c(-1,-0.5))
+I = diag(c(1,1))
+M = A%*%C + I
+N = 10*I - 3*B
+```
+
+Calculamos la matriz $X$
+
+```{r}
+X = solve(M,N)
+X
+```
+
+#### En `Python`
+
+Definimos las matrices
+
+```{python}
+A = np.array([[1,2],[0,2]])
+B = np.array([[2,-1],[-1,5]])
+C = np.array([[2,6],[-1,-0.5]])
+I = np.diag([1,1])
+M = A.dot(C) + I
+N = 10*I - 3*B
+```
+
+Calculamos la matriz $X$. En este caso debemos hallar la inversa de $M$.
+
+```{python}
+X = np.linalg.inv(M).dot(N)
+X
+```
+
+#### En `Octave`
+
+```{octave}
+# Definimos las matrices
+A = [1 2; 0 2];
+B = [2 -1; -1 5];
+C = [2 6; -1 -0.5];
+I = diag([1 1]);
+M = A*C + I;
+N = 10*I - 3*B;
+
+# Calculamos la matriz X
+X = linsolve(M,N);
+X
+```
+

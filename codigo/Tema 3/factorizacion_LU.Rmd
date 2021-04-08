@@ -1,0 +1,64 @@
+---
+title: "Factorizacion LU"
+author: "Martin Santamaria"
+date: "20/5/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+Sys.setenv(RETICULATE_PYTHON = "/Python38")
+library(reticulate)
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(engine.path = list(octave = "/Octave/Octave-5.2.0/mingw64/bin/octave-cli-5.2.0.exe"))
+```
+
+## Factorización LU
+
+```{r}
+library(matlib)
+A = rbind(c(1,0,-2,1), c(0,5,7,6), c(5,2,-15,0),c(6,-12,0,22))
+luA = LU(A)
+A
+luA$P
+luA$L %*% luA$U
+```
+
+```{r}
+A = rbind(c(0,1,3), c(1,3,-2), c(-3,-2,-1))
+b = c(1,3,-2)
+sistema = LU(A,b)
+sistema$P
+sistema$P %*% A
+sistema$L %*% sistema$U
+sistema$d
+sistema$x
+```
+
+```{python}
+import numpy as np
+import scipy.linalg
+A = np.array([[1,3,0,-1], [2,1,-1,5], [0,-2,3,-1], [1,1,3,1]])
+P,L,U = scipy.linalg.lu(A)
+P
+L
+U
+A = np.array([[0,1,3], [1,3,-2], [-3,-2,-1]])
+LU,piv = scipy.linalg.lu_factor(A)
+LU
+piv
+b = [1,3,-2]
+x = scipy.linalg.lu_solve((LU,piv),b) 
+x
+```
+
+```{octave}
+A = [1,3,0,-1; 2,1,-1,5; 0,-2,3,-1; 1,1,3,1];
+lu(A)
+[L,U,P] = lu(A);
+P
+L
+U
+A = [0,1,3; 1,3,-2; -3,-2,-1];
+lu(A)
+```
+

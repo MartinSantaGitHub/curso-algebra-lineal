@@ -1,0 +1,404 @@
+---
+title: "Vectores"
+author: "Martin Santamaria"
+date: "5/6/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+Sys.setenv(RETICULATE_PYTHON = "/Python38")
+library(reticulate)
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(engine.path = list(octave = "/Octave/Octave-5.2.0/mingw64/bin/octave-cli-5.2.0.exe"))
+```
+
+```{r include=FALSE}
+library(pracma)
+library(matlib)
+
+productoEscalar = function(x,y){
+  if (length(x) == length(y)){
+    sum(x*y)
+  }else{
+    print("ERROR: No se puede calcular el producto escalar de estos dos vectores porque 
+          no son de la misma dimensión")
+  }
+}
+
+distancia = function(x,y){
+  if (length(x) == length(y)){
+    Norm(x-y)
+  }else{
+    print("ERROR: No se puede calcular la distancia entre estos dos puntos porque 
+          no son de la misma dimensión")
+  }
+}
+
+angleRad = function(x,y){
+  if (length(x) == length(y)){
+    acos(productoEscalar(x,y)/(Norm(x)*Norm(y)))
+  }else{
+    print("ERROR: No se puede calcular el ángulo entre estos dos vectores porque 
+          no son de la misma dimensión")
+  }
+}
+
+AngleRad2d = function(x){
+  if (length(x) == 2){
+    atan(x[2]/x[1])
+  }else{
+    print("ERROR: No se puede calcular el ángulo de este vector con el eje OX porque no es de dimensión 2")
+  }
+}
+
+AngleGrad2d = function(x){
+  if (length(x) == 2){
+    atan(x[2]/x[1])*360/(2*pi)
+  }else{
+    print("ERROR: No se puede calcular el ángulo de este vector con el eje OX porque no es de dimensión 2")
+  }
+}
+
+proyeccionOrt = function(u,v){
+  if (length(u) == length(v)){
+    productoEscalar(u,v)/Norm(u)^2*u
+  }else{
+    print("ERROR: No se puede calcular la proyección ortogonal de v sobre 
+          u porque no son de la misma dimensión")
+  }
+}
+
+productoVectorial= function(x,y){
+  if (length(x) == length(y) & length(x) == 3){
+    c(x[2]*y[3] - x[3]*y[2], -(x[1]*y[3]-x[3]*y[1]), x[1]*y[2]-x[2]*y[1])
+  }else{
+    print("No se cumplen las condiciones necesarias para calcular el 
+          producto vectorial de estos dos vectores")
+  }
+}
+
+productoMixto = function(x,y,z){
+  if (length(x) == length(y) & length(x) == length(z) & length(x) == 3){
+    det(rbind(x,y,z))
+  }else{
+    print("No se cumplen las condiciones necesarias para calcular el 
+          producto mixto de estos tres vectores")
+  }
+}
+```
+
+```{python include=FALSE}
+import numpy as np
+import math
+
+def productoEscalar(x,y):
+  if len(x) == len(y):
+    suma = 0
+    for i in range(0,len(x)):
+      suma = suma + x[i]*y[i]
+    return suma
+  else:
+   return "ERROR: las longitudes de los vectores no coinciden"
+   
+def distancia(x,y):
+  if len(x) == len(y):
+    dist =  np.linalg.norm(x-y)
+    return dist
+  else:
+   return "ERROR: las longitudes de los vectores no coinciden"
+   
+def angleRad(x,y):
+  if len(x) == len(y):
+    angle = math.acos(round((productoEscalar(x,y)/(np.linalg.norm(x)*np.linalg.norm(y))),3))
+    return angle
+  else:
+    return "ERROR: Las dimensiones no coinciden" 
+    
+def angleGrad(x,y):
+  if len(x) == len(y):
+    angle = math.acos(round((productoEscalar(x,y)/(np.linalg.norm(x)*np.linalg.norm(y))),3))
+    return angle/(2*math.pi)*360
+  else:
+    return "ERROR: Las dimensiones no coinciden" 
+
+def proyeccionOrt(u,v):
+  if len(u) == len(v):
+    proy = (productoEscalar(u,v)/pow(np.linalg.norm(u),2))*u
+    return proy
+  else:
+    return "ERROR: Las dimensiones no coinciden"
+
+def productoVectorial(x,y):
+  if len(x) == len(y) and len(x) == 3:
+    z = np.array([x[1]*y[2] - x[2]*y[1], -(x[0]*y[2]-x[2]*y[0]), x[0]*y[1]-x[1]*y[0]])
+    return z
+  else:
+    return "ERROR"
+    
+def productoMixto(x,y,z):
+  if len(x) == len(y) and len(x) == len(z) and len(z) == 3:
+    return np.linalg.det(np.array([x,y,z]))
+  else:
+    return "ERROR"
+```
+
+### Pregunta 1
+
+De izquierda a derecha por fila de vectores
+
+```{r}
+# Vector p
+p = c(4,2)
+Norm(p)
+AngleGrad2d(p)
+
+# Vector q
+q = c(2,-6)
+Norm(q)
+AngleGrad2d(q)
+
+# Vector r
+r = c(-4,3)
+Norm(r)
+AngleGrad2d(r)
+
+# Vector s
+s = c(0,5)
+Norm(s)
+AngleGrad2d(s)
+
+# Vector t
+t = c(-4,0)
+Norm(t)
+AngleGrad2d(t)
+
+# Vector u
+u = c(-3,-5)
+Norm(u)
+AngleGrad2d(u)
+
+# Vector v
+v = c(0,-3)
+Norm(v)
+AngleGrad2d(v)
+
+# Vector w
+w = c(4,-3)
+Norm(w)
+AngleGrad2d(w)
+
+# Vector x
+x = c(2,5)
+Norm(x)
+AngleGrad2d(x)
+
+# Vector y
+y = c(4,0)
+Norm(y)
+AngleGrad2d(y)
+
+# Vector z
+z = c(-7,-3)
+Norm(z)
+AngleGrad2d(z)
+```
+
+### Pregunta 2
+
+```{r}
+# Primer vector
+A = c(1,2)
+B = c(2,5)
+AB = B - A
+Norm(AB)
+AngleGrad2d(AB)
+
+# Segundo vector
+A = c(-8,2)
+B = c(-5,-6)
+AB = B - A
+Norm(AB)
+AngleGrad2d(AB)
+
+# Tercer vector
+A = c(2,-2)
+B = c(1,-5)
+AB = B - A
+Norm(AB)
+AngleGrad2d(AB)
+```
+
+### Pregunta 11
+
+```{r}
+x = c(1,2,1)
+y = c(−1,0,3)
+z = c(2,1,-4)
+u = c(-3,-2,4)
+A = cbind(x,y,z)
+AB = cbind(A,u)
+
+qr(A)$rank
+qr(AB)$rank
+```
+
+El rango de la matriz $A$ es distinto del de la matriz ampliada $AB$. Por tanto, el vector $\vec{u}$ no es combinación lineal de $\vec{x}$, $\vec{y}$ y $\vec{z}$. 
+
+```{r}
+B = cbind(x,y)
+BC = cbind(B,z)
+
+qr(B)$rank
+qr(BC)$rank
+```
+
+El rango de la matriz $B$ es igual al de la matriz ampliada $BC$. Por tanto, el vector $\vec{z}$ es combinación lineal de $\vec{x}$ e $\vec{y}$. 
+
+```{r}
+Solve(B, z, fractions = TRUE)
+```
+
+$\therefore a(1,2,1) + b(−1,0,3) = (2,1,-4)$ con $a = \frac{1}{2}$ y $b = -\frac{3}{2}$
+
+### Pregunta 12
+
+```{r}
+P = c(3,0,0)
+Q = c(0,2,0)
+R = c(0,0,-4)
+S = c(3,-2,4)
+PQ = Q - P
+RS = S - R
+PS = S - P
+```
+
+- Norma de los vectores
+
+```{r}
+# PQ
+Norm(PQ)
+
+# RS
+Norm(RS)
+
+# OP
+Norm(P)
+
+# OR
+Norm(R)
+```
+
+La norma de los vectores coincide con la distancia de los puntos que definen el origen y extremo de los mismos.
+
+- Vectores unitarios
+
+```{r}
+# Vector unitario de PQ
+uPQ = (1/Norm(PQ))*PQ
+uPQ
+
+# Vector unitario de RS
+uRS = (1/Norm(RS))*RS
+uRS
+
+# Vector unitario de OP
+uOP = (1/Norm(P))*P
+uOP
+
+# Vector unitario de OR
+uOR = (1/Norm(Q))*Q
+uOR
+```
+
+- Combinación lineal de $OP$ y $OR$ con $PQ$
+
+```{r}
+A = cbind(P,R)
+AB = cbind(A,PQ)
+
+qr(A)$rank
+qr(AB)$rank
+```
+
+Los rangos no son iguales, $\therefore \nexists \ a, b \in \mathbb{R} \ / a(3,0,0) + b(0,0,-4) = (-3,2,0)$ 
+
+- Combinación lineal de $OP$, $OR$ y $PS$ con $PQ$
+
+```{r}
+B = cbind(P,R,PS)
+BC = cbind(B,PQ)
+
+qr(B)$rank
+qr(BC)$rank
+```
+
+Los rangos son iguales, $\therefore \exists \ a, b \in \mathbb{R} \ / a(3,0,0) + b(0,0,-4) + c(0,-2,4) = (-3,2,0)$ 
+
+```{r}
+Solve(B, PQ, fractions = TRUE)
+```
+
+$\therefore a = b = c = -1$
+
+### Pregunta 15
+
+Pasemos a `Python` ahora
+
+```{python}
+u = np.array([1,2,-3])
+v = np.array([-2,-1,4])
+w = np.array([0,2,0])
+z = np.array([1,0,-3])
+```
+
+```{python}
+print(f"u * u = {productoEscalar(u,u)}")
+print(f"u * (-u) = {productoEscalar(u,-u)}")
+print(f"(u + v) * (w + z) = {productoEscalar((u+v),(w+z))}")
+print(f"(u - w) * (v - z) = {productoEscalar((u-w),(v-z))}")
+print(f"||u|| = {np.linalg.norm(u)}")
+print(f"||z|| = {np.linalg.norm(z)}")
+print(f"||u + v − w + z|| = {np.linalg.norm((u+v-w+z))}")
+```
+
+### Pregunta 16
+
+```{python}
+A = np.array([2,-3])
+B = np.array([-2,5])
+```
+
+Distancia entre $A$ y $B$
+
+```{python}
+np.linalg.norm((B-A))
+```
+
+### Pregunta 17
+
+```{python}
+u = np.array([1,2])
+v = np.array([-2,1])
+print(f"u * v = {productoEscalar(u,v)}")
+print(f"Ángulo entre u, v = {angleGrad(u,v)}")
+```
+
+El producto escalar es 0, por tanto ambos vectores son ortogonales. El ángulo que forman es $\frac{\pi}{2}$ o $90°$
+
+```{python}
+u = np.array([1,-1,1])
+v = np.array([-1,1,-1])
+print(f"u * v = {productoEscalar(u,v)}")
+print(f"Ángulo entre u, v = {angleGrad(u,v)}")
+```
+
+El producto escalar no es 0, por tanto ambos vectores **no** son ortogonales. El ángulo que forman es $\pi$ o $180°$
+
+$\vec{u} = (a,-b,1)$
+
+$\vec{v} = (b,a,0)$
+
+$\langle\vec{u},\vec{v}\rangle = (a,-b,1) \cdot (b,a,0) = ab - ab + 0 = 0$
+
+El producto escalar es 0, por tanto ambos vectores son ortogonales. El ángulo que forman es $\frac{\pi}{2}$ o $90°$
+

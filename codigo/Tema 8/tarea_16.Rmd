@@ -1,0 +1,70 @@
+---
+title: "Tarea 16"
+author: "Martin Santamaria"
+date: "10/7/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+Sys.setenv(RETICULATE_PYTHON = "/Python38")
+library(reticulate)
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(engine.path = list(octave = "/Octave/Octave-5.2.0/mingw64/bin/octave-cli-5.2.0.exe"))
+```
+
+### Pregunta 2
+
+```{r}
+B = rbind(c(1,1,3),c(0,2,0),c(-2,0,3))
+eig = eigen(B)
+eig
+```
+
+### Pregunta 3
+
+```{r}
+# Función para determinar si una matriz es 
+# diagonalizable en el cuerpo de los números reales.
+
+isDiagonalizable = function(M){
+  eig = eigen(M)
+  
+  if ((ncol(eig$vectors) == length(eig$values)) & !(typeof(eig$values) == "complex")){
+    diag(eig$values)
+  }else{
+    print("La matriz ingresada no es diagonalizable")
+  }
+}
+```
+
+```{r}
+A = rbind(c(1,4),c(0,3))
+B = rbind(c(1,2,0),c(2,-1,5),c(0,5,1))
+C = rbind(c(1,1,3),c(0,2,0),c(-2,0,3))
+
+isDiagonalizable(A)
+isDiagonalizable(B)
+isDiagonalizable(C)
+```
+
+### Pregunta 6
+
+```{octave}
+A = [[0,0,4];[1,2,1];[2,4,-2]];
+[V, l] = eig(A)
+```
+
+### Pregunta 7
+
+```{python}
+import numpy as np
+from numpy import linalg as la
+
+A = np.array([[3,-1,1],[0,2,0],[1,-1,3]])
+w, v = la.eig(A)
+w
+v
+```
+
+Por tanto una base de $\mathbb{R}^3$ puede ser $B = \langle (0.707, 0, 0.707), (-0.707, 0, 0.707), (0.408, 0.816, 0.408) \rangle$
+

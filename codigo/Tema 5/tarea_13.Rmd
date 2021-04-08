@@ -1,0 +1,222 @@
+---
+title: "Tarea 13"
+author: "Martin Santamaria"
+date: "9/6/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(pracma)
+```
+
+### Pregunta 1
+
+```{r}
+vectorEquivalente = function(origenX,extremoX,origenY){
+  if (length(origenX) == length(origenY) & length(origenX) == length(extremoX)){
+    eq = extremoX - origenX
+    extremoY = eq + origenY
+    list(OrigenY = origenY, ExtremoY = extremoY)
+  }else{
+    print("ERROR: No se puede hallar el vector equivalente porque los puntos ingresados no son de la misma dimensión")
+  }
+}
+```
+
+```{r}
+A = c(1,2)
+B = c(0,3)
+C = c(-1,0)
+vectorEquivalente(A,B,C)
+```
+
+### Pregunta 2
+
+```{r}
+Angle2d = function(x,grad = FALSE){
+  if (length(x) == 2){
+    atan(x[2]/x[1])*(if (grad) 180/pi else 1)
+  }else{
+    print("ERROR: No se puede calcular el ángulo de este vector con el eje OX porque no es de dimensión 2")
+  }
+}
+```
+
+```{r}
+v = c(9,-10)
+Angle2d(v,grad = TRUE)
+```
+
+### Pregunta 3
+
+```{r}
+productoEscalar = function(x,y){
+  if (length(x) == length(y)){
+    sum(x*y)
+  }else{
+    print("ERROR: No se puede calcular el producto escalar de estos dos vectores porque no son de la misma dimensión")
+  }
+}
+```
+
+```{r}
+u = c(9,1,0)
+v = c(-3,5,1)
+w = c(1,10,-5)
+```
+
+- **Conmutativa**
+
+```{r}
+productoEscalar(u,v) == productoEscalar(v,u)
+```
+
+- **Distributiva**
+
+```{r}
+productoEscalar(u,(v+w)) == productoEscalar(u,v) + productoEscalar(u,w)
+```
+
+- **Asociativa entre escalares y vectores**
+
+```{r}
+lambda = 5
+productoEscalar(lambda*u,v) == productoEscalar(u,lambda*v)
+```
+
+### Pregunta 4
+
+```{r}
+u = c(11,20,-13)
+```
+
+- $||u||$
+
+```{r}
+normaU = Norm(u)
+normaU
+```
+
+- $||5u|| = 5||u||$
+ 
+```{r}
+Norm(5*u) == 5*normaU
+```
+
+- $||(-9)u|| = |-9|\cdot||u|| = 9||u||$
+
+```{r}
+Norm(-9*u)
+abs(-9)*normaU
+9*normaU
+```
+
+- División por su norma
+
+```{r}
+w = u/normaU
+Norm(w)
+```
+
+### Pregunta 5
+
+```{r}
+A = c(1,-2,0)
+B = c(10,-11,7)
+C = c(-15,-7,3)
+```
+
+- Distancia entre $A$ y $B$
+
+```{r}
+u = B-A
+Norm(u)
+```
+
+- Distancia entre $A$ y $C$
+
+```{r}
+v = C-A
+Norm(v)
+```
+
+- Distancia entre $B$ y $C$
+
+```{r}
+Norm(C-B)
+```
+
+### Pregunta 6
+
+```{r}
+angle = function(x,y,grad = FALSE){
+  if (length(x) == length(y)){
+    acos(productoEscalar(x,y)/(Norm(x)*Norm(y)))*(if (grad) 180/pi else 1)
+  }else{
+    print("ERROR: No se puede calcular el ángulo entre estos dos vectores porque no son de la misma dimensión")
+  }
+}
+
+productoVectorial= function(x,y){
+  if (length(x) == length(y) & length(x) == 3){
+    c(x[2]*y[3] - x[3]*y[2], -(x[1]*y[3]-x[3]*y[1]), x[1]*y[2]-x[2]*y[1])
+  }else{
+    print("No se cumplen las condiciones necesarias para calcular el producto vectorial de estos dos vectores")
+  }
+}
+```
+
+- Ángulo entre $AB$ y $AC$
+
+```{r}
+angle(u,v,grad = TRUE)
+```
+
+- $CB \land AC$
+
+```{r}
+w = B - C
+productoVectorial(w,v)
+```
+
+### Pregunta 7
+
+```{r}
+vectoresOrtUnit = function(x){
+  if (length(x) == 2){
+    if(x[1] == 0 & x[2] == 0){
+      print("Ingresó el vector 0")
+      return()
+    }else if(x[1] == 0){
+      #"v = (x/||v||,0)"
+      w = c(1,0)
+    }else if(x[2] == 0){
+      #"v = (0,y/||v||)"
+      w = c(0,1)
+    }else{
+      #paste("v = (x/||v||,(",(-x[1]/x[2]),"/||v||)*x)", sep = "")
+      y = c(1,-x[1]/x[2])
+      normY = Norm(y)
+      w = y/normY
+    }
+    list(V1 = w, V2 = -w)
+  }else{
+    print("ERROR: Solo se permiten vectores de dimensión 2")
+  }
+}
+```
+
+```{r}
+vectoresOrtUnit(c(0,0))
+vectoresOrtUnit(c(0,-3))
+vectoresOrtUnit(c(5,0))
+vectoresOrtUnit(c(5,-3))
+productoEscalar(c(0.5144958, 0.8574929),c(5,-3))
+productoEscalar(c(-0.5144958, -0.8574929),c(5,-3))
+Norm(c(-0.5144958, -0.8574929))
+Norm(c(0.5144958, 0.8574929))
+```

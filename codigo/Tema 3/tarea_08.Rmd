@@ -1,0 +1,170 @@
+---
+title: "Tarea 8"
+author: "Martin Santamaria"
+date: "25/5/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+Sys.setenv(RETICULATE_PYTHON = "/Python38")
+library(reticulate)
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(engine.path = list(octave = "/Octave/Octave-5.2.0/mingw64/bin/octave-cli-5.2.0.exe"))
+```
+
+### Pregunta 1
+
+#### - **$A_1$**
+
+#### En `R`
+
+```{r}
+library(matlib)
+A1 = rbind(c(0,2,-3,4), c(0,0,-5,-1), c(5,-1,-2,0), c(-2,0,4,6))
+luA1 = LU(A1)
+luA1$L
+luA1$U
+luA1$P
+luA1$L %*% luA1$U
+luA1$P %*% A1
+```
+
+#### En `Python`
+
+```{python}
+import numpy as np
+import scipy.linalg
+A1 = np.array([[0,2,-3,4], [0,0,-5,-1], [5,-1,-2,0], [-2,0,4,6]])
+P,L,U = scipy.linalg.lu(A1)
+P
+L
+U
+P.dot(L).dot(U)
+A1
+```
+
+#### En `Octave`
+
+```{octave}
+A1 = [0,2,-3,4; 0,0,-5,-1; 5,-1,-2,0; -2,0,4,6];
+[L,U,P] = lu(A1);
+P
+L
+U
+L * U
+P * A1
+```
+
+#### - **$A_2$**
+
+#### En `R`
+
+```{r}
+A2 = rbind(c(1,2,-1,4), c(0,-1,5,8), c(2,3,1,4), c(1,-1,6,4))
+luA2 = LU(A2)
+luA2$L
+luA2$U
+luA2$P
+luA2$L %*% luA2$U
+A2
+```
+
+#### En `Python`
+
+```{python}
+A2 = np.array([[1,2,-1,4], [0,-1,5,8], [2,3,1,4], [1,-1,6,4]])
+P,L,U = scipy.linalg.lu(A2)
+P
+L
+U
+P.dot(L).dot(U)
+A2
+```
+
+#### En `Octave`
+
+```{octave}
+A2 = [1,2,-1,4; 0,-1,5,8; 2,3,1,4; 1,-1,6,4];
+[L,U,P] = lu(A2);
+P
+L
+U
+L * U
+P * A2
+```
+
+#### - **$A_3$**
+
+#### En `R`
+
+```{r}
+A3 = rbind(c(2,4,-2,0), c(3,7,5,-4), c(-1,2,-2,5), c(6,1,0,2))
+luA3 = LU(A3)
+luA3$L
+luA3$U
+luA3$P
+luA3$L %*% luA3$U
+A3
+```
+
+#### En `Python`
+
+```{python}
+A3 = np.array([[2,4,-2,0], [3,7,5,-4], [-1,2,-2,5], [6,1,0,2]])
+P,L,U = scipy.linalg.lu(A3)
+P
+L
+U
+P.dot(L).dot(U)
+A3
+```
+
+#### En `Octave`
+
+```{octave}
+A3 = [2,4,-2,0; 3,7,5,-4; -1,2,-2,5; 6,1,0,2];
+[L,U,P] = lu(A3);
+P
+L
+U
+L * U
+P * A3
+```
+
+#### - **$A_4$**
+
+#### En `R`
+
+```{r}
+A4 = rbind(c(0,2,3,1), c(0,4,-1,5), c(2,0,3,1), c(1,-4,5,6))
+luA4 = LU(A4)
+luA4$L
+luA4$U
+luA4$P
+luA4$P %*% luA4$L %*% luA4$U
+A4
+```
+
+#### En `Python`
+
+```{python}
+A4 = np.array([[0,2,3,1], [0,4,-1,5], [2,0,3,1], [1,-4,5,6]])
+P,L,U = scipy.linalg.lu(A4)
+P
+L
+U
+P.dot(L).dot(U)
+A4
+```
+
+#### En `Octave`
+
+```{octave}
+A4 = [0,2,3,1; 0,4,-1,5; 2,0,3,1; 1,-4,5,6];
+[L,U,P] = lu(A4);
+P
+L
+U
+L * U
+P * A4
+```

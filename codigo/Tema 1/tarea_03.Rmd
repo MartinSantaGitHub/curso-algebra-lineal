@@ -1,0 +1,1277 @@
+---
+title: "Tarea 3"
+author: "Martin Santamaria"
+date: "9/5/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Pregunta 1
+
+Recordemos que para poder realizar el producto entre dos matrices, el número de columnas de la primer matriz debe coincidir con el número de filas de la segunda y el resultado va a ser siempre una matriz con el número de filas de la primer matriz y el número de columnas de la segunda. Teniendo esto en cuenta, procedemos con las multiplicaciones.
+
+- $A \cdot B = \begin{pmatrix}
+0 & 1 & -2 \\
+2 & 3 & -1 \\
+1 & -1 & 5
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & -1 & 2 & 1 \\
+2 & -2 & 2 & -2 \\
+-1 & 2 & 1 & 2
+\end{pmatrix} = \begin{pmatrix}
+4 & -6 & 0 & -6 \\
+9 & -10 & 9 & -6 \\
+-6 & 11 & 5 & 13
+\end{pmatrix}$
+
+- $B \cdot C = \begin{pmatrix}
+1 & -1 & 2 & 1 \\
+2 & -2 & 2 & -2 \\
+-1 & 2 & 1 & 2
+\end{pmatrix} \cdot \begin{pmatrix}
+2 \\
+0 \\
+1 \\
+-4
+\end{pmatrix} = \begin{pmatrix}
+0 \\
+14 \\
+-9
+\end{pmatrix}$
+
+- $B^t = \begin{pmatrix}
+1 & 2 & -1 \\
+-1 & -2 & 2 \\
+2 & 2 & 1 \\
+1 & -2 & 2
+\end{pmatrix}$
+
+- $B^t \cdot A = \begin{pmatrix}
+1 & 2 & -1 \\
+-1 & -2 & 2 \\
+2 & 2 & 1 \\
+1 & -2 & 2
+\end{pmatrix} \cdot \begin{pmatrix}
+0 & 1 & -2 \\
+2 & 3 & -1 \\
+1 & -1 & 5
+\end{pmatrix} = \begin{pmatrix}
+3 & 8 & -9 \\
+-2 & -9 & 14 \\
+5 & 7 & -1 \\
+-2 & -7 & 10
+\end{pmatrix}$
+
+- $C^t \cdot B^t = \begin{pmatrix}
+2 & 0 & 1 & -4 
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 2 & -1 \\
+-1 & -2 & 2 \\
+2 & 2 & 1 \\
+1 & -2 & 2
+\end{pmatrix} = \begin{pmatrix}
+0 & 14 & -9 
+\end{pmatrix}$
+
+### Pregunta 2
+
+Sea $A \in \mathcal{M}_{3 x 4}(\mathbb{K}) \ / \ a_{ij} = \frac{(-1)^{i+j}}{i+j}$
+
+Entonces $A = \begin{pmatrix}
+\frac{1}{2} & -\frac{1}{3} & \frac{1}{4} & -\frac{1}{5} \\
+-\frac{1}{3} & \frac{1}{4} & -\frac{1}{5} & \frac{1}{6} \\
+\frac{1}{4} & -\frac{1}{5} & \frac{1}{6} & -\frac{1}{7}
+\end{pmatrix}$
+
+### Pregunta 3
+
+Sea $A \in \mathcal{M}_{(n+1) x (n+1)}(\mathbb{K})$ y $k \in \mathbb{R}$
+
+Entonces $A = \begin{pmatrix}
+1 & k^{j-i} & \cdots & k^{j-i} \\
+0 & 1 & \cdots & k^{j-i} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & 1
+\end{pmatrix}$
+
+Vemos que $A \in \mathcal{U}_{(n+1) x (n+1)}(\mathbb{K})$ con $n \in \mathbb{N}$
+
+la matriz $A$ es una matriz triangular superior.
+
+### Pregunta 4
+
+Sea $X \in \mathcal{M}_2(\mathbb{K}) \ / \ X = \begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}$
+
+$A \cdot X = \begin{pmatrix}
+0 & 1 \\
+0 & 0
+\end{pmatrix} \cdot \begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix} = \begin{pmatrix}
+c & d \\
+0 & 0
+\end{pmatrix}$
+
+Se debe cumplir $AX = 0$ entoces $\begin{pmatrix}
+c & d \\
+0 & 0
+\end{pmatrix} = \begin{pmatrix}
+0 & 0 \\
+0 & 0
+\end{pmatrix}$
+
+$\therefore a,b \in \mathbb{R}$ y $c = d = 0$ 
+
+### Pregunta 5
+
+$A^2 = \begin{pmatrix}
+0 & 1 \\
+0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+0 & 1 \\
+0 & 1
+\end{pmatrix} = \begin{pmatrix}
+0 & 1 \\
+0 & 1
+\end{pmatrix}$
+
+$B^2 = \begin{pmatrix}
+-1 & -1 \\
+0 & 0
+\end{pmatrix} \cdot \begin{pmatrix}
+-1 & -1 \\
+0 & 0
+\end{pmatrix} = \begin{pmatrix}
+1 & 1 \\
+0 & 0
+\end{pmatrix}$
+
+$AB = \begin{pmatrix}
+0 & 1 \\
+0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+-1 & -1 \\
+0 & 0
+\end{pmatrix} = \begin{pmatrix}
+0 & 0 \\
+0 & 0
+\end{pmatrix}$
+
+$B^3 = \begin{pmatrix}
+1 & 1 \\
+0 & 0
+\end{pmatrix} \cdot \begin{pmatrix}
+-1 & -1 \\
+0 & 0
+\end{pmatrix} = \begin{pmatrix}
+-1 & -1 \\
+0 & 0
+\end{pmatrix}$
+
+$A^3 = \begin{pmatrix}
+0 & 1 \\
+0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+0 & 1 \\
+0 & 1
+\end{pmatrix} = \begin{pmatrix}
+0 & 1 \\
+0 & 1
+\end{pmatrix}$
+
+$2AB = \begin{pmatrix}
+0 & 0 \\
+0 & 0
+\end{pmatrix}$
+
+$A^2B = \begin{pmatrix}
+0 & 1 \\
+0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+-1 & -1 \\
+0 & 0
+\end{pmatrix} = \begin{pmatrix}
+0 & 0 \\
+0 & 0
+\end{pmatrix}$
+
+$AB^2 = \begin{pmatrix}
+0 & 1 \\
+0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 1 \\
+0 & 0
+\end{pmatrix} = \begin{pmatrix}
+0 & 0 \\
+0 & 0
+\end{pmatrix}$
+
+$3A^2B = 3AB^2 = \begin{pmatrix}
+0 & 0 \\
+0 & 0
+\end{pmatrix}$
+
+$A+B = \begin{pmatrix}
+-1 & 0 \\
+0 & 1
+\end{pmatrix}$
+
+$(A+B)^2 = \begin{pmatrix}
+-1 & 0 \\
+0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+-1 & 0 \\
+0 & 1
+\end{pmatrix} = \begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}$
+
+$(A+B)^3 = \begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+-1 & 0 \\
+0 & 1
+\end{pmatrix} = \begin{pmatrix}
+-1 & 0 \\
+0 & 1
+\end{pmatrix}$
+
+Con todo esto realizamos las correspondientes sumas
+
+$A^2 + 2AB + B^2 = \begin{pmatrix}
+0 & 1 \\
+0 & 1
+\end{pmatrix} + \begin{pmatrix}
+0 & 0 \\
+0 & 0
+\end{pmatrix} + \begin{pmatrix}
+1 & 1 \\
+0 & 0
+\end{pmatrix} = \begin{pmatrix}
+1 & 2 \\
+0 & 1
+\end{pmatrix}$
+
+Vemos que $\begin{pmatrix}
+1 & 2 \\
+0 & 1
+\end{pmatrix} \ne \begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}$ 
+
+$\therefore (A+B)^2 \ne A^2 + 2AB + B^2$
+
+Para la siguiente suma, omitimos las matrices nulas
+
+$A^3 + 3A^2B + 3AB^2 + B^3 = \begin{pmatrix}
+0 & 1 \\
+0 & 1
+\end{pmatrix} + \begin{pmatrix}
+-1 & -1 \\
+0 & 0
+\end{pmatrix} = \begin{pmatrix}
+-1 & 0 \\
+0 & 1
+\end{pmatrix}$
+
+Vemos que $\begin{pmatrix}
+-1 & 0 \\
+0 & 1
+\end{pmatrix} = \begin{pmatrix}
+-1 & 0 \\
+0 & 1
+\end{pmatrix}$ 
+
+$\therefore (A+B)^3 = A^3 + 3A^2B + 3AB^2 + B^3$
+
+### Pregunta 6
+
+De la segunda ecuación, despejamos $B$
+
+$B = \begin{pmatrix}
+\frac{3}{2} & 1 & 0 \\
+2 & \frac{1}{2} & 5
+\end{pmatrix} - 3A$
+
+Reemplazamos en la primera y nos queda
+
+$4A + 2 \begin{pmatrix}
+\frac{3}{2} & 1 & 0 \\
+2 & \frac{1}{2} & 5
+\end{pmatrix} - 6A = \begin{pmatrix}
+3 & 4 & 2 \\
+2 & 1 & 8
+\end{pmatrix}$
+
+Operando obtenemos $A$
+
+$-2A = \begin{pmatrix}
+3 & 4 & 2 \\
+2 & 1 & 8
+\end{pmatrix} - \begin{pmatrix}
+3 & 2 & 0 \\
+4 & 1 & 10
+\end{pmatrix}$
+
+$-2A = \begin{pmatrix}
+0 & 2 & 2 \\
+-2 & 0 & -2
+\end{pmatrix}$
+
+$A = \begin{pmatrix}
+0 & -1 & -1 \\
+1 & 0 & 1
+\end{pmatrix}$
+
+Reemplazando en $B$, obtenemos la matriz
+
+$B = \begin{pmatrix}
+\frac{3}{2} & 1 & 0 \\
+2 & \frac{1}{2} & 5
+\end{pmatrix} - \begin{pmatrix}
+0 & -3 & -3 \\
+3 & 0 & 3
+\end{pmatrix}$
+
+$B = \begin{pmatrix}
+\frac{3}{2} & 4 & 3 \\
+-1 & \frac{1}{2} & 2
+\end{pmatrix}$
+
+### Pregunta 7
+
+- $U \in \mathcal{M}_3(\mathbb{K})$
+
+$a - b = 0 \rightarrow a = b$
+
+$c - b = 0 \rightarrow c = b \rightarrow c = a$
+
+$a + b -2 = 0 \rightarrow 2a = 2 \rightarrow a = 1$
+
+$\therefore a = b = c = 1$
+
+- $L \in \mathcal{M}_3(\mathbb{K})$
+
+$a + b = 0 \rightarrow 2b = 0 \rightarrow b = 0$
+
+$a - c = 0 \rightarrow a = b \rightarrow a = 0$
+
+$b - c = 0 \rightarrow b = c \rightarrow c = 0$
+
+$\therefore a = b = c = 0$
+
+- $A^t = A$
+
+$A^t = \begin{pmatrix}
+a & a - b & a + b - 2 \\
+a + b & b & c - b \\
+a - c & b - c & c 
+\end{pmatrix}$
+
+Igualando nos queda
+
+$a = a \ \ \ a - b = a + b \ \ \ a - c = a + b - 2$
+
+$a - b = a + b \ \ \ b = b \ \ \ b - c = c - b$
+
+$a + b - 2 = a - c \ \ \ b - c = c - b \ \ \ c = c$
+
+Nos quedamos con las siguientes ecuaciones
+
+$a - b = a + b \rightarrow b = 0 \rightarrow 2b = 0 \rightarrow b = 0$
+
+$b - c = c - b \rightarrow c = b$
+
+$a - c = a + b - 2 \rightarrow 2b = 2 \rightarrow b = 1$
+
+Pero de la tercera ecuación obtuvimos que $b = 1$ o sea $1 \ne 0$
+
+$\therefore \nexists \ a, b, c \in \mathbb{R} \ / A^t = A$
+
+### Pregunta 8
+
+Calculemos unos cuantos exponentes
+
+$A^2 = A \cdot A = \begin{pmatrix}
+1 & 0 \\
+1 & 1 
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 \\
+1 & 1 
+\end{pmatrix} = \begin{pmatrix}
+1 & 0 \\
+2 & 1 
+\end{pmatrix}$
+
+$A^3 = \begin{pmatrix}
+1 & 0 \\
+2 & 1 
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 \\
+1 & 1 
+\end{pmatrix} = \begin{pmatrix}
+1 & 0 \\
+3 & 1 
+\end{pmatrix}$
+
+$A^4 = \begin{pmatrix}
+1 & 0 \\
+3 & 1 
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 0 \\
+1 & 1 
+\end{pmatrix} = \begin{pmatrix}
+1 & 0 \\
+4 & 1 
+\end{pmatrix}$
+
+$\therefore A^n = \begin{pmatrix}
+1 & 0 \\
+n & 1 
+\end{pmatrix}$
+
+Realizamos un par de sumas para ver si se observa algun patrón
+
+$A + A^2 = \begin{pmatrix}
+1 & 0 \\
+1 & 1 
+\end{pmatrix} + \begin{pmatrix}
+1 & 0 \\
+2 & 1 
+\end{pmatrix} = \begin{pmatrix}
+2 & 0 \\
+3 & 2 
+\end{pmatrix}$
+
+$A + A^2 + A^3 = \begin{pmatrix}
+2 & 0 \\
+3 & 2 
+\end{pmatrix} + \begin{pmatrix}
+1 & 0 \\
+3 & 1 
+\end{pmatrix} = \begin{pmatrix}
+3 & 0 \\
+6 & 3 
+\end{pmatrix}$
+
+$A + A^2 + A^3 + A^4 = \begin{pmatrix}
+3 & 0 \\
+6 & 3 
+\end{pmatrix} + \begin{pmatrix}
+1 & 0 \\
+4 & 1 
+\end{pmatrix} = \begin{pmatrix}
+4 & 0 \\
+10 & 4 
+\end{pmatrix}$
+
+Vemos que el elemento $a_{21}$ cumple la serie $1,3,6,10...$
+
+$\therefore \sum_{k=1}^n A^k = \begin{pmatrix}
+n & 0 \\
+\frac{n(n+1)}{2} & n 
+\end{pmatrix} \ \forall n >= 1$
+
+### Pregunta 9
+
+Sea $X \in \mathcal{M}_2(\mathbb{K})$ donde $X = \begin{pmatrix}
+a & b \\
+c & d 
+\end{pmatrix}$ y $X \cdot X = I_2$
+
+$X \cdot X = \begin{pmatrix}
+a & b \\
+c & d 
+\end{pmatrix} \cdot \begin{pmatrix}
+a & b \\
+c & d 
+\end{pmatrix} = \begin{pmatrix}
+1 & 0 \\
+0 & 1 
+\end{pmatrix}$
+
+$X^2 = \begin{pmatrix}
+a^2 + bc & ab + bd \\
+ca + dc & cb + d^2
+\end{pmatrix} = \begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}$
+
+De la igualdad anterior, obtenemos las siguientes ecuaciones
+
+$a^2 + bc = 1$
+
+$b(a + d) = 0$
+
+$c(a + d) = 0$
+
+$cb + d^2 = 1$
+
+De las dos ecuaciones siguientes
+
+$b(a + d) = 0$ y $c(a + d) = 0$
+
+Se obtiene que $a = -d$
+
+De la cuarta, despejamos $b$
+
+$b = \frac{1-d^2}{c}$
+
+Reemplazamos $a$ y $b$ en la primera ecuación
+
+$d^2 + (1 - d^2) = 1 \rightarrow 1 = 1$
+
+La ecuación se cumple, por tanto los valores $a, b, c, d \in \mathbb{R}$ que cumplen con la igualdad son
+
+$a \in \mathbb{R}$
+
+$b = \frac{1-d^2}{c}$
+
+$c \in \mathbb{R} \ / \ c \ne 0$
+
+$d = -a$
+
+Con estas igualdades podemos obtener, por ejemplo, las siguientes matrices raíces cuadradas de $I_2$
+
+$a = 3 \ \ \ d = -3 \ \ \ b = -\frac{8}{5} \ \ \ c = 5$
+
+$A = \begin{pmatrix}
+3 & -\frac{8}{5} \\
+5 & -3
+\end{pmatrix}$
+
+$a = 1 \ \ \ d = -1 \ \ \ b = 0 \ \ \ c = 7$
+
+$B = \begin{pmatrix}
+1 & 0 \\
+7 & -1
+\end{pmatrix}$
+
+$a = 5 \ \ \ d = -5 \ \ \ b = -12 \ \ \ c = 2$
+
+$C = \begin{pmatrix}
+5 & -12 \\
+2 & -5
+\end{pmatrix}$
+
+- Sea $B \in \mathcal{M}_2(\mathbb{K}) \ \ / \ \ B = \begin{pmatrix}
+0 & 1 \\
+0 & 0
+\end{pmatrix}$
+
+Utilizamos las ecuaciones calculadas anteriormente para probar la igualdad con la matriz $B$
+
+$a^2 + bc = 0$
+
+$b(a + d) = 1$
+
+$c(a + d) = 0$
+
+$cb + d^2 = 0$
+
+Podemos utilizar la segunda y tercera ecuación para probar que $B$ no tiene raíces cuadradas.
+
+De la segunda, despejando $(a+d)$ nos queda $(a+d) = \frac{1}{b}$ y despejando $(a+d)$ de la tercera tenemos $(a+d) = 0$
+
+Igualando $(a+b)$ de la segunda en la tercera tenemos $\frac{1}{b} = 0$ lo cual es un absurdo ya que $\nexists \ b \in \mathbb{R} \ / \frac{1}{b} = 0$
+
+$\therefore \nexists$ raíces cuadradas de $B$ **c.q.d.**
+
+### Pregunta 10
+
+Sea $X \in \mathcal{M}_3(\mathbb{K}) \ \ / \ \ X = \begin{pmatrix}
+a & b & c \\
+d & e & f \\
+g & h & i
+\end{pmatrix}$ con $a,b,c,d,e,f,g,h,i \in \mathbb{R}$
+
+$AX = XA$
+
+$\begin{pmatrix}
+0 & 0 & 0 \\
+1 & 0 & 0 \\
+1 & 1 & 0
+\end{pmatrix} \cdot \begin{pmatrix}
+a & b & c \\
+d & e & f \\
+g & h & i
+\end{pmatrix} = \begin{pmatrix}
+a & b & c \\
+d & e & f \\
+g & h & i
+\end{pmatrix} \cdot \begin{pmatrix}
+0 & 0 & 0 \\
+1 & 0 & 0 \\
+1 & 1 & 0
+\end{pmatrix}$
+
+$\begin{pmatrix}
+0 & 0 & 0 \\
+a & b & c \\
+a + d & b + e & c + f
+\end{pmatrix} = \begin{pmatrix}
+b + c & c & 0 \\
+e + f & f & 0 \\
+h + i & i & 0
+\end{pmatrix}$
+
+$b + c = 0 \rightarrow b = 0$
+
+$c = 0 \rightarrow c = 0$
+
+$a = e + f \rightarrow a = e = i$
+
+$f = b \rightarrow f = 0$
+
+$c = 0$
+
+$a + d = h + i \rightarrow i + d = h + i \rightarrow d = h$
+
+$b + e = i \rightarrow e = i$
+
+$c + f = 0$
+
+$\therefore X = \begin{pmatrix}
+a & 0 & 0 \\
+d & a & 0 \\
+g & d & a
+\end{pmatrix}$ con $a,d,g \in \mathbb{R}$
+
+Probamos con $a = 2 \ \ \ d = 3 \ \ \ g = 7$
+
+$\begin{pmatrix}
+0 & 0 & 0 \\
+1 & 0 & 0 \\
+1 & 1 & 0
+\end{pmatrix} \cdot \begin{pmatrix}
+2 & 0 & 0 \\
+3 & 2 & 0 \\
+7 & 3 & 2
+\end{pmatrix} = \begin{pmatrix}
+0 & 0 & 0 \\
+2 & 0 & 0 \\
+5 & 2 & 0
+\end{pmatrix} = \begin{pmatrix}
+2 & 0 & 0 \\
+3 & 2 & 0 \\
+7 & 3 & 2
+\end{pmatrix} \cdot \begin{pmatrix}
+0 & 0 & 0 \\
+1 & 0 & 0 \\
+1 & 1 & 0
+\end{pmatrix}$
+
+### Pregunta 11
+
+- $B = \begin{pmatrix}
+1 & 1 & 1 \\
+1 & 1 & 1 \\
+1 & 1 & 1
+\end{pmatrix}$
+
+$B^2 = \begin{pmatrix}
+1 & 1 & 1 \\
+1 & 1 & 1 \\
+1 & 1 & 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 1 & 1 \\
+1 & 1 & 1 \\
+1 & 1 & 1
+\end{pmatrix} = \begin{pmatrix}
+3 & 3 & 3 \\
+3 & 3 & 3 \\
+3 & 3 & 3
+\end{pmatrix}$
+
+$B^3 = \begin{pmatrix}
+3 & 3 & 3 \\
+3 & 3 & 3 \\
+3 & 3 & 3
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 1 & 1 \\
+1 & 1 & 1 \\
+1 & 1 & 1
+\end{pmatrix} = \begin{pmatrix}
+9 & 9 & 9 \\
+9 & 9 & 9 \\
+9 & 9 & 9
+\end{pmatrix}$
+
+$B^4 = \begin{pmatrix}
+9 & 9 & 9 \\
+9 & 9 & 9 \\
+9 & 9 & 9
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 1 & 1 \\
+1 & 1 & 1 \\
+1 & 1 & 1
+\end{pmatrix} = \begin{pmatrix}
+27 & 27 & 27 \\
+27 & 27 & 27 \\
+27 & 27 & 27
+\end{pmatrix}$
+
+$\therefore B^n = \begin{pmatrix}
+3^{n-1} & 3^{n-1} & 3^{n-1} \\
+3^{n-1} & 3^{n-1} & 3^{n-1} \\
+3^{n-1} & 3^{n-1} & 3^{n-1}
+\end{pmatrix} = 3^{n-1} \begin{pmatrix}
+1 & 1 & 1 \\
+1 & 1 & 1 \\
+1 & 1 & 1
+\end{pmatrix}$
+
+- $A = \begin{pmatrix}
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+0 & 0 & 0
+\end{pmatrix}$
+
+$A^2 = \begin{pmatrix}
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+0 & 0 & 0
+\end{pmatrix} \cdot \begin{pmatrix}
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+0 & 0 & 0
+\end{pmatrix} = \begin{pmatrix}
+0 & 0 & 1 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{pmatrix}$
+
+$A^3 = \begin{pmatrix}
+0 & 0 & 1 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{pmatrix} \cdot \begin{pmatrix}
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+0 & 0 & 0
+\end{pmatrix} = \begin{pmatrix}
+0 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{pmatrix}$
+
+$A$ es una matriz nilpotente de índice 3.
+
+Por tanto, $\forall n \in \mathbb{N}$
+
+Si $n >= 3$ entonces $A^n = 0$
+
+Si $n <= 2$ entonces $A^n = \begin{pmatrix}
+0 & 2 - 2^{n-1} & n - 1 \\
+0 & 0 & 2 - 2^{n-1} \\
+0 & 0 & 0
+\end{pmatrix}$
+
+### Pregunta 12
+
+Consideremos para la demostración las siguientes matrices cuadradas de orden 2
+
+Sean $A \in \mathcal{M}_2(\mathbb{K})$ y $B \in \mathcal{M}_2(\mathbb{K})$
+
+$A = \begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}$
+
+$B = \begin{pmatrix}
+e & f \\
+g & h
+\end{pmatrix}$
+
+$A = A^t$
+
+$\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix} = \begin{pmatrix}
+a & c \\
+b & d
+\end{pmatrix}$
+
+$B^t = -B$
+
+$\begin{pmatrix}
+e & g \\
+f & h
+\end{pmatrix} = \begin{pmatrix}
+0 & -f \\
+-f & 0
+\end{pmatrix}$
+
+$AB = \begin{pmatrix}
+ae + bg & af + bh \\
+ce + dg & cf + dh
+\end{pmatrix}$
+
+$BA = \begin{pmatrix}
+ae + cf & eb + fd \\
+ga + hc & gb + hd
+\end{pmatrix}$
+
+$AB - BA = \begin{pmatrix}
+bg - fc & af + bh - eb - fd \\
+ce + dg - ga - hc & cf - gb
+\end{pmatrix}$
+
+Por las propiedades de $A$ y $B$ tenemos que $b = c \ \ \ e = 0 \ \ \ h = 0$ y $f = -g$
+
+Reemplazando
+
+$AB - BA = \begin{pmatrix}
+2gb & -ag + gd \\
+dg - ag & -2gb
+\end{pmatrix} = \begin{pmatrix}
+2gb & g(d-a) \\
+g(d-a) & -2gb
+\end{pmatrix}$
+
+$(AB - BA)^t = \begin{pmatrix}
+2gb & -ag + gd \\
+dg - ag & -2gb
+\end{pmatrix} = \begin{pmatrix}
+2gb & g(d-a) \\
+g(d-a) & -2gb
+\end{pmatrix} = AB - BA$ **c.q.d.**
+
+Reacomodando $AB$ y $BA$
+
+$AB = \begin{pmatrix}
+bg & -ag \\
+dg & -gb
+\end{pmatrix}$
+
+$BA = \begin{pmatrix}
+-gb & -gd \\
+ga & gb
+\end{pmatrix}$
+
+$AB + BA = \begin{pmatrix}
+0 & -ag - gd \\
+dg + ga & 0
+\end{pmatrix} = \begin{pmatrix}
+0 & -g(a + d) \\
+g(a + d) & 0
+\end{pmatrix}$
+
+$-(AB + BA) = \begin{pmatrix}
+0 & g(a + d) \\
+-g(a + d) & 0
+\end{pmatrix}$
+
+$(AB + BA)^t = \begin{pmatrix}
+0 & g(a + d) \\
+-g(a + d) & 0
+\end{pmatrix} = -(AB + BA)$ **c.q.d.**
+
+### Pregunta 13
+
+Consideremos para la demostración la siguiente matriz cuadrada de orden 2
+
+Sea $A \in \mathcal{M}_2(\mathbb{K})$
+
+$A = \begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}$
+
+$A^t = \begin{pmatrix}
+a & c \\
+b & d
+\end{pmatrix}$
+
+- $A + A^t = \begin{pmatrix}
+2a & c + b \\
+c + b & 2d
+\end{pmatrix}$
+
+$(A + A^t)^t = \begin{pmatrix}
+2a & c + b \\
+c + b & 2d
+\end{pmatrix} = A + A^t$ **c.q.d.**
+
+- $A - A^t = \begin{pmatrix}
+0 & b - c \\
+-b + c & 0
+\end{pmatrix}$
+
+$(A - A^t)^t = \begin{pmatrix}
+0 & -b + c \\
+b - c & 0
+\end{pmatrix}$
+
+$-(A - A^t) = \begin{pmatrix}
+0 & -b + c \\
+b - c & 0
+\end{pmatrix} = (A - A^t)^t$ **c.q.d.**
+
+- $(A + A^t) + (A - A^t) = \begin{pmatrix}
+2a & 2b \\
+2c & 2d
+\end{pmatrix} = 2A$
+
+$\therefore \frac{1}{2}(A + A^t) + \frac{1}{2}(A - A^t) = A$ **c.q.d.**
+
+### Pregunta 14
+
+Consideremos para la demostración las siguientes matrices cuadradas de orden 2
+
+Sean $A \in \mathcal{M}_2(\mathbb{K})$ y $B \in \mathcal{M}_2(\mathbb{K})$
+
+$A = \begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}$
+
+$B = \begin{pmatrix}
+e & f \\
+g & h
+\end{pmatrix}$
+
+$A^t = \begin{pmatrix}
+a & c \\
+b & d
+\end{pmatrix}$
+
+$B = B^t = \begin{pmatrix}
+e & f \\
+g & h
+\end{pmatrix} = \begin{pmatrix}
+e & g \\
+f & h
+\end{pmatrix}$ con lo cual $B = \begin{pmatrix}
+e & g \\
+g & h
+\end{pmatrix}$
+
+- $AA^t = \begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix} \cdot \begin{pmatrix}
+a & c \\
+b & d
+\end{pmatrix} = \begin{pmatrix}
+a^2 + b^2 & ac + bd \\
+ac + bd & c^2 + d^2
+\end{pmatrix}$
+
+$(AA^t)^t = \begin{pmatrix}
+a^2 + b^2 & ac + bd \\
+ac + bd & c^2 + d^2
+\end{pmatrix} = AA^t$ **c.q.d.**
+
+- $AB = \begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix} \cdot \begin{pmatrix}
+e & g \\
+g & h
+\end{pmatrix} = \begin{pmatrix}
+ae + bg & ag + bh \\
+ce + dg & cg + dh
+\end{pmatrix}$
+
+$ABA^t = \begin{pmatrix}
+ae + bg & ag + bh \\
+ce + dg & cg + dh
+\end{pmatrix} \cdot \begin{pmatrix}
+a & c \\
+b & d
+\end{pmatrix} = \begin{pmatrix}
+a^2e + 2abg + b^2h & ace + adg + bcg + bdh \\
+ace + adg + bcg + bdh & c^2e + 2cdg + d^2h
+\end{pmatrix} = (ABA^t)^t$ **c.q.d.**
+
+- Si $A$ es antisimetrica, entonces $A^t = -A$
+
+$A^t = -A = \begin{pmatrix}
+a & c \\
+b & d
+\end{pmatrix} = \begin{pmatrix}
+-a & -b \\
+-c & -d
+\end{pmatrix}$
+
+Por tanto $A = \begin{pmatrix}
+0 & c \\
+-c & 0
+\end{pmatrix}$
+
+Queremos probar $A^2 = (A^2)^t$
+
+$A^2 = \begin{pmatrix}
+0 & c \\
+-c & 0
+\end{pmatrix} \cdot \begin{pmatrix}
+0 & c \\
+-c & 0
+\end{pmatrix} = \begin{pmatrix}
+-c^2 & 0 \\
+0 & -c^2
+\end{pmatrix} = (A^2)^t$ **c.q.d.**
+
+- Para esta demostración, vamos a utilizar el principio de inducción.
+
+$A^2 = 0$ por tanto $A$ es una matriz nilpotente de índice 2.
+
+Con $i = 0 \rightarrow A(A + I_n)^0 = A$ se verifica el caso base
+
+$A(A + I_n)^{i+1} = A$
+
+$A(A + I_n)^i(A + I_n) = A$
+
+Por hipótesis de inducción $A(A + I_n)^i = A$
+
+Entonces
+
+$A(A + I_n) = A$
+
+$A^2 + AI_n = A$
+
+$0 + A = A \rightarrow A = A$ **c.q.d.**
+
+$\therefore$ se verifica $A(A + I_n)^i = A \ \ \ \forall_i=0,1,2,...$ 
+
+### Pregunta 15
+
+- Matriz $A \in \mathcal{M}_4(\mathbb{K})$ estocástica
+
+$A = \begin{pmatrix}
+\frac{1}{10} & \frac{2}{5} & \frac{3}{10} & \frac{1}{5} \\
+\frac{1}{2} & \frac{1}{5} & \frac{1}{10} & \frac{1}{5} \\
+\frac{2}{5} & \frac{3}{10} & \frac{1}{5} & \frac{1}{10} \\
+\frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} 
+\end{pmatrix}$
+
+- Matriz $A \in \mathcal{M}_4(\mathbb{K})$ doblemente estocástica
+
+$A = \begin{pmatrix}
+\frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4}  \\
+\frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4}  \\
+\frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4}  \\
+\frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} 
+\end{pmatrix}$
+
+Que también se puede escribir como $A = \frac{1}{4} \begin{pmatrix}
+1 & 1 & 1 & 1  \\
+1 & 1 & 1 & 1  \\
+1 & 1 & 1 & 1  \\
+1 & 1 & 1 & 1 
+\end{pmatrix}$
+
+- Sea $A \in \mathcal{M}_3(\mathbb{K})$
+
+$A = \begin{pmatrix}
+a & b & c  \\
+d & e & f  \\
+g & h & i
+\end{pmatrix}$
+
+$A^t = \begin{pmatrix}
+a & d & g  \\
+b & e & h  \\
+c & f & i
+\end{pmatrix}$
+
+$\begin{pmatrix}
+a & b & c  \\
+d & e & f  \\
+g & h & i
+\end{pmatrix} = \begin{pmatrix}
+a & d & g  \\
+b & e & h  \\
+c & f & i
+\end{pmatrix} = \begin{pmatrix}
+a & d & g  \\
+d & c & h  \\
+g & h & i
+\end{pmatrix}$
+
+$a + d + g = 1$
+
+$d + e + h = 1$
+
+$g + h + i = 1$
+
+$a = \frac{3}{10}$, $d = \frac{1}{2}$, $g = \frac{1}{5}$
+
+$e = \frac{1}{5}$, $h = \frac{3}{10}$, $i = \frac{1}{2}$
+
+$\therefore A = \begin{pmatrix}
+\frac{3}{10} & \frac{1}{2} & \frac{1}{5}  \\
+\frac{1}{2} & \frac{1}{5} & \frac{3}{10}  \\
+\frac{1}{5} & \frac{3}{10} & \frac{1}{2}
+\end{pmatrix} = A^t$
+
+### Pregunta 16
+
+- Por la forma de $A$ se ve que es una matriz nilpotente. Vamos a calcular las potencias de $A$ para hallar su índice de nilpotencia, es decir, el valor $m$ tal que $A^m = 0$. Con ello, quedará demostrado que en el sumatorio de $B$ solamente hay un número finito de términos no nulos.
+
+$A^2 = \begin{pmatrix}
+0 & a & a^2 & a^3 \\
+0 & 0 & a & a^2 \\
+0 & 0 & 0 & a \\
+0 & 0 & 0 & 0
+\end{pmatrix} \cdot \begin{pmatrix}
+0 & a & a^2 & a^3 \\
+0 & 0 & a & a^2 \\
+0 & 0 & 0 & a \\
+0 & 0 & 0 & 0
+\end{pmatrix} = \begin{pmatrix}
+0 & 0 & a^2 & 2a^3 \\
+0 & 0 & 0 & a^2 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix}$
+
+$A^3 = \begin{pmatrix}
+0 & 0 & a^2 & 2a^3 \\
+0 & 0 & 0 & a^2 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix} \cdot \begin{pmatrix}
+0 & a & a^2 & a^3 \\
+0 & 0 & a & a^2 \\
+0 & 0 & 0 & a \\
+0 & 0 & 0 & 0
+\end{pmatrix} = \begin{pmatrix}
+0 & 0 & 0 & a^3 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix}$
+
+$A^4 = \begin{pmatrix}
+0 & 0 & 0 & a^3 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix} \cdot \begin{pmatrix}
+0 & a & a^2 & a^3 \\
+0 & 0 & a & a^2 \\
+0 & 0 & 0 & a \\
+0 & 0 & 0 & 0
+\end{pmatrix} = \begin{pmatrix}
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix}$ **c.q.d.**
+
+Por tanto vemos que $A$ es una matriz nilpotente de índice 4.
+
+$B = \begin{pmatrix}
+0 & a & a^2 & a^3 \\
+0 & 0 & a & a^2 \\
+0 & 0 & 0 & a \\
+0 & 0 & 0 & 0
+\end{pmatrix} - \begin{pmatrix}
+0 & 0 & \frac{a^2}{2} & 2a^3 \\
+0 & 0 & 0 & \frac{a^2}{2} \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix} + \begin{pmatrix}
+0 & 0 & 0 & \frac{a^3}{3} \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix} = \begin{pmatrix}
+0 & a & \frac{a^2}{2} & \frac{a^3}{3} \\
+0 & 0 & a & \frac{a^2}{2} \\
+0 & 0 & 0 & a \\
+0 & 0 & 0 & 0
+\end{pmatrix}$
+
+- Pasemos ahora a demostrar el sumatorio de $B$ el cual de nuevo, se ve que es una matriz nilpotente.
+
+$B^2 = \begin{pmatrix}
+0 & a & \frac{a^2}{2} & \frac{a^3}{3} \\
+0 & 0 & a & \frac{a^2}{2} \\
+0 & 0 & 0 & a \\
+0 & 0 & 0 & 0
+\end{pmatrix} \cdot \begin{pmatrix}
+0 & a & \frac{a^2}{2} & \frac{a^3}{3} \\
+0 & 0 & a & \frac{a^2}{2} \\
+0 & 0 & 0 & a \\
+0 & 0 & 0 & 0
+\end{pmatrix} = \begin{pmatrix}
+0 & 0 & a^2 & a^3 \\
+0 & 0 & 0 & a^2 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix}$
+
+$B^3 = \begin{pmatrix}
+0 & 0 & a^2 & a^3 \\
+0 & 0 & 0 & a^2 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix} \cdot \begin{pmatrix}
+0 & a & \frac{a^2}{2} & \frac{a^3}{3} \\
+0 & 0 & a & \frac{a^2}{2} \\
+0 & 0 & 0 & a \\
+0 & 0 & 0 & 0
+\end{pmatrix} = \begin{pmatrix}
+0 & 0 & 0 & a^3 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix}$
+
+$B^4 = \begin{pmatrix}
+0 & 0 & 0 & a^3 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix} \cdot \begin{pmatrix}
+0 & a & \frac{a^2}{2} & \frac{a^3}{3} \\
+0 & 0 & a & \frac{a^2}{2} \\
+0 & 0 & 0 & a \\
+0 & 0 & 0 & 0
+\end{pmatrix} = \begin{pmatrix}
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix}$
+
+$B$ es otra una matriz nilpotente de índice 4.
+
+Por tanto el sumatorio nos queda $B + \frac{1}{2}B^2 + \frac{1}{6}B^3$
+
+$\begin{pmatrix}
+0 & a & \frac{a^2}{2} & \frac{a^3}{3} \\
+0 & 0 & a & \frac{a^2}{2} \\
+0 & 0 & 0 & a \\
+0 & 0 & 0 & 0
+\end{pmatrix} + \begin{pmatrix}
+0 & 0 & \frac{a^2}{2} & \frac{a^3}{2} \\
+0 & 0 & 0 & \frac{a^2}{2} \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix} + \begin{pmatrix}
+0 & 0 & 0 & \frac{a^3}{6} \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix} = \begin{pmatrix}
+0 & a & a^2 & a^3 \\
+0 & 0 & a & a^2 \\
+0 & 0 & 0 & a \\
+0 & 0 & 0 & 0
+\end{pmatrix} = A$ **c.q.d.**

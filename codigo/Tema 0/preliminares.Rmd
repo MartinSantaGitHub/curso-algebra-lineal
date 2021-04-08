@@ -1,0 +1,71 @@
+---
+title: "Prueba Octave"
+author: "Martin Santamaria"
+date: "23/4/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+Sys.setenv(RETICULATE_PYTHON = "/Python38")
+library(reticulate)
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(engine.path = list(octave = "/Octave/Octave-5.2.0/mingw64/bin/octave-cli-5.2.0.exe"))
+```
+
+#### En `Papel`
+
+$z = (\sqrt{3} + i)^6$
+
+La forma polar de un número complejo $z$ es $z = |z|e^{\theta i}$ donde $\theta$ es el argumento principal de $z$ ($Arg(z)$) donde $Arg(z) \in (-\pi, \pi]$
+
+Llamo $z_1$ al número complejo dentro del paréntesis y lo paso a la forma polar.
+
+$z_1 = \sqrt{3} + i$
+
+$|z| = \sqrt{(\sqrt{3})^2+1^2} = 2$ 
+
+La parte real de $z_1$ está sobre el eje positivo de $x$ y la parte imaginaria está sobre el eje positivo de $y$. Por tanto $\theta = arctan \left( \frac{1}{\sqrt{3}} \right) = \frac{\pi}{6}$
+
+Así la forma polar de $z_1$ nos queda
+
+$z_1 = 2e^{\frac{\pi}{6}i}$
+
+Operando el exponente $z$ nos queda
+
+$z = (z_1)^6 = 64e^{\pi i} \ \ \therefore Arg(z) = \pi$
+
+#### En `R`
+
+```{r}
+Arg((sqrt(3)+1i)^6)
+```
+
+#### En `Octave`
+
+```{octave}
+arg((sqrt(3)+i)^6)
+```
+
+#### En `Python`
+
+```{python}
+import cmath
+import math
+
+cmath.phase((math.sqrt(3)+1j)**6)
+```
+
+```{r}
+library("polynom")
+p = polynomial(coef = c(1,-6,0,0,1))
+q = polynomial(coef = c(0,-5,0,3))
+r= polynomial(coef = c(2,0,-1,0,1))
+p
+length(p) - 1
+s = p/q-r
+predict(s,0)
+```
+
+```{python}
+import sympy
+```

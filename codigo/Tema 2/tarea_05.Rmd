@@ -1,0 +1,493 @@
+---
+title: "Tarea 5"
+author: "Martin Santamaria"
+date: "11/5/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Ejercicio 1
+
+Primero determinamos si el sistema de ecuaciones tiene soluciones
+
+consideremos $A = \begin{pmatrix}
+1 & -2 & 1 & -1 \\
+2 & -3 & 2 & -1 \\
+3 & -5 & 3 & -4 \\
+-1 & 1 & -1 & 2
+\end{pmatrix}$
+
+Calculamos el rango de $A$
+
+$F_4 + F_1 \rightarrow F_4$
+
+$3F_1 - F_3 \rightarrow F_3$
+
+$2F_1 - F_2 \rightarrow F_2$
+
+$\begin{pmatrix}
+1 & -2 & 1 & -1 \\
+0 & -1 & 0 & -1 \\
+0 & -1 & 0 & 1 \\
+0 & -1 & 0 & 1
+\end{pmatrix}$
+
+$F_4 - F_3 \rightarrow F_4$
+
+$F_3 - F_2 \rightarrow F_3$
+
+$\begin{pmatrix}
+1 & -2 & 1 & -1 \\
+0 & -1 & 0 & -1 \\
+0 & 0 & 0 & 2 \\
+0 & 0 & 0 & 0
+\end{pmatrix}$
+
+por tanto $rg(A) = 3$
+
+consideremos ahora la matriz ampliada $(A|B) = \begin{pmatrix}
+1 & -2 & 1 & -1 & \vdots & 3 \\
+2 & -3 & 2 & -1 & \vdots & -1 \\
+3 & -5 & 3 & -4 & \vdots & 3 \\
+-1 & 1 & -1 & 2 & \vdots & 5 
+\end{pmatrix}$
+
+Realizando las mismas operaciones sobre $(A|B)$
+
+$F_4 + F_1 \rightarrow F_4$
+
+$3F_1 - F_3 \rightarrow F_3$
+
+$2F_1 - F_2 \rightarrow F_2$
+
+$\begin{pmatrix}
+1 & -2 & 1 & -1 & \vdots & 3 \\
+0 & -1 & 0 & -1 & \vdots & 7 \\
+0 & -1 & 0 & 1 & \vdots & 6 \\
+0 & -1 & 0 & 1 & \vdots & 8
+\end{pmatrix}$
+
+$F_4 - F_3 \rightarrow F_4$
+
+$F_3 - F_2 \rightarrow F_3$
+
+$\begin{pmatrix}
+1 & -2 & 1 & -1 & \vdots & 3 \\
+0 & -1 & 0 & -1 & \vdots & 7 \\
+0 & 0 & 0 & 2 & \vdots & -1 \\
+0 & 0 & 0 & 0 & \vdots & 2
+\end{pmatrix}$
+
+por tanto $rg(A|B) = 4$
+
+Por el teorema de Rouché-Frobenius $rg(A) < rg(A|B)$, entonces el sistema es incompatible y no tiene soluciones.
+
+$\therefore \nexists$ soluciones para el sistema de ecuaciones dado.
+
+### Ejercicio 2
+
+Primero despejemos la matriz $X$ para luego reemplazar por las matrices correspondientes
+
+$AX + B = CX - X + D$
+
+$AX - CX + X = D - B$
+
+$(A - C)X + X = D - B$
+
+$(A - C) + I_n = (D - B)X^{-1}$ donde $XX^{-1} = I_n$
+
+$(A - C + I_n)X = (D - B)$
+
+Por tanto $X = (A - C + I_n)^{-1}(D - B)$
+
+La condición para resolver esta ecuación es ver que la matriz $(A - C + I_n)$ sea invertible.
+
+- **a)** $(A - C + I_2) = \begin{pmatrix}
+1 & 0 \\
+0 & -1 
+\end{pmatrix} - \begin{pmatrix}
+4 & -2 \\
+-3 & -5 
+\end{pmatrix} + \begin{pmatrix}
+1 & 0 \\
+0 & 1 
+\end{pmatrix} = \begin{pmatrix}
+-2 & 2 \\
+3 & 5 
+\end{pmatrix}$
+
+A simple vista se observa que las filas de la matriz obtenida de la suma $(A - C + I_2)$ no son linealmente dependientes, por tanto $(A - C + I_2)$ es invertible.
+
+$\begin{pmatrix}
+-2 & 2 & \vdots & 1 & 0 \\
+3 & 5 & \vdots & 0 & 1
+\end{pmatrix}$
+
+$\frac{2}{3}F_2 + F_1 \rightarrow F_2$
+
+$\begin{pmatrix}
+1 & -1 & \vdots & -\frac{1}{2} & 0 \\
+0 & \frac{16}{3} & \vdots & 0 & \frac{2}{3}
+\end{pmatrix}$
+
+$F_1 + \frac{3}{16}F_2 \rightarrow F_1$
+
+$\frac{3}{16}F_2 \rightarrow F_2$
+
+$\begin{pmatrix}
+1 & 0 & \vdots & -\frac{1}{2} & \frac{1}{8} \\
+0 & 1 & \vdots & 0 & \frac{1}{8}
+\end{pmatrix}$
+
+$\therefore (A - C + I_2)^{-1} = \begin{pmatrix}
+-\frac{1}{2} & \frac{1}{8} \\
+0 & \frac{1}{8}
+\end{pmatrix}$
+
+$D - B = \begin{pmatrix}
+1 & 3 \\
+4 & -2 
+\end{pmatrix} - \begin{pmatrix}
+1 & 3 \\
+2 & 0 
+\end{pmatrix} = \begin{pmatrix}
+0 & 0 \\
+2 & -2 
+\end{pmatrix}$
+
+$X = (A - C + I_2)^{-1}(D-B) = \begin{pmatrix}
+-\frac{1}{2} & \frac{1}{8} \\
+0 & \frac{1}{8}
+\end{pmatrix} \cdot \begin{pmatrix}
+0 & 0 \\
+2 & -2 
+\end{pmatrix} = \begin{pmatrix}
+\frac{1}{4} & -\frac{1}{4} \\
+\frac{1}{4} & -\frac{1}{4} 
+\end{pmatrix}$
+
+$\therefore X = \begin{pmatrix}
+\frac{1}{4} & -\frac{1}{4} \\
+\frac{1}{4} & -\frac{1}{4} 
+\end{pmatrix}$
+
+- **b)** $(A - C + I_3) = \begin{pmatrix}
+1 & 2 & 1 \\
+0 & -3 & 1 \\
+1 & 1 & 1
+\end{pmatrix} - \begin{pmatrix}
+3 & 0 & 2 \\
+-2 & 1 & -1 \\
+-1 & 1 & 2
+\end{pmatrix} + \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix} = \begin{pmatrix}
+-1 & 2 & -1 \\
+2 & -3 & 2 \\
+2 & 0 & 0
+\end{pmatrix}$
+
+Esta matriz tiene pinta de tener inversa al no observarse filas linealmente dependientes. Por tanto, hallemos su inversa.
+
+$\begin{pmatrix}
+-1 & 2 & -1 & \vdots & 1 & 0 & 0 \\
+2 & -3 & 2 & \vdots & 0 & 1 & 0 \\
+2 & 0 & 0 & \vdots & 0 & 0 & 1 
+\end{pmatrix}$
+
+$F_2 + 2F_1 \rightarrow F_2$
+
+$\frac{1}{2}F_3 \rightarrow F_3$
+
+$\begin{pmatrix}
+-1 & 2 & -1 & \vdots & 1 & 0 & 0 \\
+0 & 1 & 0 & \vdots & 2 & 1 & 0 \\
+1 & 0 & 0 & \vdots & 0 & 0 & \frac{1}{2} 
+\end{pmatrix}$
+
+$F_3 + F_1 \rightarrow F_3$
+
+$\begin{pmatrix}
+-1 & 2 & -1 & \vdots & 1 & 0 & 0 \\
+0 & 1 & 0 & \vdots & 2 & 1 & 0 \\
+0 & 2 & -1 & \vdots & 1 & 0 & \frac{1}{2} 
+\end{pmatrix}$
+
+$F_3 - 2F_2 \rightarrow F_3$
+
+$\begin{pmatrix}
+-1 & 2 & -1 & \vdots & 1 & 0 & 0 \\
+0 & 1 & 0 & \vdots & 2 & 1 & 0 \\
+0 & 0 & -1 & \vdots & -3 & -2 & \frac{1}{2} 
+\end{pmatrix}$
+
+$F_1 - F_3 \rightarrow F_1$
+
+$-F_3 \rightarrow F_3$
+
+$\begin{pmatrix}
+-1 & 2 & 0 & \vdots & 4 & 2 & -\frac{1}{2} \\
+0 & 1 & 0 & \vdots & 2 & 1 & 0 \\
+0 & 0 & 1 & \vdots & 3 & 2 & -\frac{1}{2} 
+\end{pmatrix}$
+
+$F_1 - 2F_2 \rightarrow F_1$
+
+$\begin{pmatrix}
+-1 & 0 & 0 & \vdots & 0 & 0 & -\frac{1}{2} \\
+0 & 1 & 0 & \vdots & 2 & 1 & 0 \\
+0 & 0 & 1 & \vdots & 3 & 2 & -\frac{1}{2} 
+\end{pmatrix}$
+
+$-F_1 \rightarrow F_1$
+
+$\begin{pmatrix}
+1 & 0 & 0 & \vdots & 0 & 0 & \frac{1}{2} \\
+0 & 1 & 0 & \vdots & 2 & 1 & 0 \\
+0 & 0 & 1 & \vdots & 3 & 2 & -\frac{1}{2} 
+\end{pmatrix}$
+
+$\therefore (A - C + I_3)^{-1} = \begin{pmatrix}
+0 & 0 & \frac{1}{2} \\
+2 & 1 & 0 \\
+3 & 2 & -\frac{1}{2} 
+\end{pmatrix}$
+
+$D - B = \begin{pmatrix}
+1 & 3 & 5 \\
+4 & 0 & -2 \\
+0 & 0 & 1
+\end{pmatrix} - \begin{pmatrix}
+1 & 3 & 0 \\
+0 & 2 & 0 \\
+-1 & 0 & 1 
+\end{pmatrix} = \begin{pmatrix}
+0 & 0 & 5 \\
+4 & -2 & -2 \\
+1 & 0 & 0 
+\end{pmatrix}$
+
+$X = (A - C + I_3)^{-1}(D-B) = \begin{pmatrix}
+0 & 0 & \frac{1}{2} \\
+2 & 1 & 0 \\
+3 & 2 & -\frac{1}{2}
+\end{pmatrix} \cdot \begin{pmatrix}
+0 & 0 & 5 \\
+4 & -2 & -2 \\
+1 & 0 & 0 
+\end{pmatrix} = \begin{pmatrix}
+\frac{1}{2} & 0 & 0 \\
+4 & -2 & 8 \\
+\frac{15}{2} & -4 & 11 
+\end{pmatrix}$
+
+$\therefore X = \begin{pmatrix}
+\frac{1}{2} & 0 & 0 \\
+4 & -2 & 8 \\
+\frac{15}{2} & -4 & 11 
+\end{pmatrix}$
+
+### Ejercicio 3
+
+En estos apartados, para no repetir cáculos como en el ejercicio 1, vamos a calcular directamente el sistema de ecuaciones sobre la matriz ampliada. De este modo vamos a inferir si el rango de $(A|B)$ es igual o mayor al de la matriz $A$. Procedamos
+
+- **a)** $(A|B) = \begin{pmatrix}
+6 & -3 & -3 & 2 & \vdots & 32 \\
+1 & -2 & -2 & 1 & \vdots & 4 \\
+1 & -1 & -1 & 1 & \vdots & 6 \\
+1 & 1 & 1 & -1 & \vdots & 5 
+\end{pmatrix}$
+
+$F_4 - F_3 \rightarrow F_4$
+
+$F_3 - F_2 \rightarrow F_3$
+
+$F_1 - 6F_2 \rightarrow F_2$
+
+$\begin{pmatrix}
+6 & -3 & -3 & 2 & \vdots & 32 \\
+0 & 9 & 9 & -4 & \vdots & 8 \\
+0 & 1 & 1 & 0 & \vdots & 2 \\
+0 & 2 & 2 & -2 & \vdots & -1 
+\end{pmatrix}$
+
+$F_4 - 2F_3 \rightarrow F_4$
+
+$F_2 - 9F_3 \rightarrow F_2$
+
+$\begin{pmatrix}
+6 & -3 & -3 & 2 & \vdots & 32 \\
+0 & 0 & 0 & -4 & \vdots & -10 \\
+0 & 1 & 1 & 0 & \vdots & 2 \\
+0 & 0 & 0 & -2 & \vdots & -5 
+\end{pmatrix}$
+
+Reordenando nos queda
+
+$\begin{pmatrix}
+6 & -3 & -3 & 2 & \vdots & 32 \\
+0 & 1 & 1 & 0 & \vdots & 2 \\
+0 & 0 & 0 & -4 & \vdots & -10 \\
+0 & 0 & 0 & -2 & \vdots & -5 
+\end{pmatrix}$
+
+$2F_4 - F_3 \rightarrow F_4$
+
+$\begin{pmatrix}
+6 & -3 & -3 & 2 & \vdots & 32 \\
+0 & 1 & 1 & 0 & \vdots & 2 \\
+0 & 0 & 0 & -4 & \vdots & -10 \\
+0 & 0 & 0 & 0 & \vdots & 0 
+\end{pmatrix}$
+
+De este resultado podemos observar que $rg(A) = rg(A|B) = 3$. Pero $rg(A) < n$ donde $n$ es el número de incognitas $(n = 4)$. Por tanto se trata de un sistema compatible indeterminado.
+
+Simplificando un poco más la matriz
+
+$F_1 + 3F_2 \rightarrow F_1$
+
+$\begin{pmatrix}
+6 & 0 & 0 & 2 & \vdots & 38 \\
+0 & 1 & 1 & 0 & \vdots & 2 \\
+0 & 0 & 0 & -4 & \vdots & -10 \\
+0 & 0 & 0 & 0 & \vdots & 0 
+\end{pmatrix}$
+
+Del sistema de ecuaciones tenemos que $x_4 = \frac{5}{2}$, $x_1 = \frac{38-5}{6} = \frac{11}{2}$, $x_2 = 2 - x_3$ con $x_3 \in \mathbb{R}$
+
+Entonces
+
+$x_1 = \frac{11}{2}$
+
+$x_2 = 2 - x_3$
+
+$x_3 \in \mathbb{R}$
+
+$x_4 = \frac{5}{2}$
+
+- **b)** $(A|B) = \begin{pmatrix}
+1 & 2 & 3 & \vdots & 4 \\
+8 & 7 & 6 & \vdots & 5 \\
+9 & 11 & 10 & \vdots & 12 
+\end{pmatrix}$
+
+$F_2 - 8F_1 \rightarrow F_2$
+
+$F_3 - 9F_1 \rightarrow F_3$
+
+$\begin{pmatrix}
+1 & 2 & 3 & \vdots & 4 \\
+0 & -9 & -18 & \vdots & -27 \\
+0 & -7 & -17 & \vdots & -24 
+\end{pmatrix}$
+
+$F_3 - \frac{7}{9}F_2 \rightarrow F_3$
+
+$\begin{pmatrix}
+1 & 2 & 3 & \vdots & 4 \\
+0 & -9 & -18 & \vdots & -27 \\
+0 & 0 & -3 & \vdots & -3 
+\end{pmatrix}$
+
+Podemos ver que $rg(A) = rg(A|B) = 3 = n$. Por tanto es un sistema compatible determinado cuya solución es
+
+$z = 1$, $y = \frac{-27+18}{-9} = 1$, $x = 4 - 5 = -1$
+
+Entonces
+
+$x = -1$
+
+$y = 1$
+
+$z = 1$
+
+- **c)** $(A|B) = \begin{pmatrix}
+1 & 2 & 3 & \vdots & 4 \\
+0 & -1 & 2 & \vdots & 0 \\
+1 & -3 & 13 & \vdots & -1 
+\end{pmatrix}$
+
+$F_3 - F_1 \rightarrow F_3$
+
+$\begin{pmatrix}
+1 & 2 & 3 & \vdots & 4 \\
+0 & -1 & 2 & \vdots & 0 \\
+0 & -5 & 10 & \vdots & -5 
+\end{pmatrix}$
+
+$F_3 - 5F_2 \rightarrow F_3$
+
+$\begin{pmatrix}
+1 & 2 & 3 & \vdots & 4 \\
+0 & -1 & 2 & \vdots & 0 \\
+0 & 0 & 0 & \vdots & -5 
+\end{pmatrix}$
+
+Podemos ver que $rg(A) = 2$ mientras que $rg(A|B) = 3$ por tanto, por el teorema de Rouché-Frobenius $rg(A) < rg(A|B)$, entonces el sistema es incompatible y no tiene soluciones.
+
+- **d)** $(A|B) = \begin{pmatrix}
+3 & 1 & 4 & 1 & \vdots & 0 \\
+5 & 0 & 2 & 6 & \vdots & 0 \\
+0 & -1 & 0 & -2 & \vdots & 0 \\
+3 & 2 & 3 & 1 & \vdots & 0 
+\end{pmatrix}$
+
+Es un sistema homogéneo, por tanto se trata de un sistema compatible ya que los sistemas homogéneos siempre tienen soluciones, por lo menos, la solución trivial.
+
+$F_4 - F_1 \rightarrow F_4$
+
+$F_2 - \frac{5}{3}F_1 \rightarrow F_2$
+
+$\begin{pmatrix}
+3 & 1 & 4 & 1 \\
+0 & -\frac{5}{3} & -\frac{14}{3} & \frac{13}{3} \\
+0 & -1 & 0 & -2 \\
+0 & 1 & -1 & 0 
+\end{pmatrix}$
+
+$F_4 + F_3 \rightarrow F_4$
+
+$F_2 - \frac{5}{3}F_3 \rightarrow F_2$
+
+$\begin{pmatrix}
+3 & 1 & 4 & 1 \\
+0 & 0 & -\frac{14}{3} & \frac{23}{3} \\
+0 & -1 & 0 & -2 \\
+0 & 0 & -1 & -2 
+\end{pmatrix}$
+
+$F_1 + F_3 \rightarrow F_1$
+
+$F_2 - \frac{14}{3}F_4 \rightarrow F_2$
+
+$\begin{pmatrix}
+3 & 0 & 4 & -1 \\
+0 & 0 & 0 & 17 \\
+0 & -1 & 0 & -2 \\
+0 & 0 & -1 & -2 
+\end{pmatrix}$
+
+$F_1 + 4F_4 \rightarrow F_1$
+
+$\begin{pmatrix}
+3 & 0 & 0 & -9 \\
+0 & 0 & 0 & 17 \\
+0 & -1 & 0 & -2 \\
+0 & 0 & -1 & -2 
+\end{pmatrix}$
+
+Reordenando
+
+$\begin{pmatrix}
+3 & 0 & 0 & -9 \\
+0 & -1 & 0 & -2 \\
+0 & 0 & -1 & -2 \\
+0 & 0 & 0 & 17 
+\end{pmatrix}$
+
+Despejando las incognitas de este sistema de ecuaciones podemos observar que $x_1 = x_2 = x_3 = x_4 = 0$
